@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="string_array">
+        <item>出行服务界面</item>
+        <item>个人中心界面</item>
+        <item>音乐休闲界面</item>
+        <item>社交娱乐界面</item>
+    </string-array>
+</resources>

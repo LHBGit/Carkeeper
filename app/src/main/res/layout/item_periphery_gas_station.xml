@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/item_periphery_gas_station_name"
+        android:text="中石油新大昌加油站"
+        android:textSize="@dimen/font_size_14"
+        android:textColor="@color/carkeeper_order_1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/item_periphery_gas_station_price"
+        android:text="5.58"
+        android:textSize="@dimen/font_size_16"
+        android:textColor="@color/carkeeper_main_color"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:id="@+id/periphery_gas_station_linear_layout"
+        android:layout_below="@+id/item_periphery_gas_station_name"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/periphery_gas_station_address"
+            android:text="广东省湛江市麻章区湖光镇西岭路段"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/textColorPrimary"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/gas_unit"
+            android:layout_gravity="right|center_vertical"
+            android:textSize="@dimen/font_size_11"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_below="@+id/periphery_gas_station_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/periphery_gas_station_distance"
+            android:background="@color/colorPrimary"
+            android:text="3.3km"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_size_11"
+            android:textColor="@color/carkeeper_text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/periphery_gas_station_belong"
+            android:text="中石油"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/periphery_gas_station_distance"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/periphery_gas_station_type"
+            android:text="93/97/0#"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/periphery_gas_station_belong"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

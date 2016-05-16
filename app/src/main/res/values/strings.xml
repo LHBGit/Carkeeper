@@ -1,0 +1,141 @@
+<resources>
+    <!--app名称-->
+    <string name="app_name">Carkeeper</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- 侧滑菜单项顶部相关值 -->
+    <string name="default_username">Herbert Li</string>
+    <string name="default_signature">我正在努力做界面ing</string>
+
+    <!-- 侧滑菜单项选项相关值 -->
+    <string name="menu_car_service">出行服务</string>
+    <string name="menu_person_center">个人中心</string>
+    <string name="menu_ac_community">社区交流</string>
+    <string name="menu_music">音乐休闲</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_title">Contacting Mind</string>
+
+    <!--注册登录模块相关值-->
+    <string name="back"><![CDATA[＜]]></string>
+    <string name="register">注 册</string>
+    <string name="login_with_person_info">账号登录</string>
+    <string name="login_with_teltphone_num">手机登录</string>
+    <string name="get_check_code">获取验证码</string>
+    <string name="login">登 录</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="recover_password">密码更新</string>
+    <string name="account">Account</string>
+    <string name="password">Password</string>
+    <string name="password_verification">Password verification</string>
+    <string name="telephone_num">Mobile Phone</string>
+    <string name="check_code">Check Code</string>
+    <string name="commit">确认提交</string>
+    
+    <!--个人中心模块相关值-->
+    <string name="account_info">账户信息</string>
+    <string name="garage">我的车库</string>
+    <string name="order_management">订单管理</string>
+    <string name="feedback">意见反馈</string>
+    <string name="illegal_check">违章查询</string>
+    <string name="default_telephone">未绑定</string>
+    <string name="default_email">未绑定</string>
+    <string name="default_weChat">未绑定</string>
+    <string name="default_change_psw">修改密码</string>
+
+    <!--garage模块-->
+    <string name="garage_title">我的车库</string>
+    <string name="brand_model_number_title">品牌型号</string>
+    <string name="license_plate_number_title">车牌号码</string>
+    <string name="garage_detail">详情 ></string>
+    <string name="car_info_detail_brands_title">汽车品牌</string>
+    <string name="car_info_detail_logo_title">汽车标志</string>
+    <string name="car_info_detail_model_number_title">型号</string>
+    <string name="car_info_detail_car_number_title">车牌号码</string>
+    <string name="car_info_detail_engine_number_title">发动机号</string>
+    <string name="car_info_detail_body_level_title">车身级别</string>
+    <string name="car_info_detail_milage_title">里程数</string>
+    <string name="car_info_detail_gas_amount_title">汽油量</string>
+    <string name="car_info_detail_engine_performance_title">发动机性能</string>
+    <string name="car_info_detail_transmission_performance_title">变速器性能</string>
+    <string name="car_info_detail_headlight_title">车灯</string>
+
+    <!--feedback模块-->
+    <string name="feedback_title">意见反馈</string>
+    <string name="contact_way">您的联系方式：QQ\电话\邮箱</string>
+    <string name="send">发送</string>
+    <string name="feedback_content_hint">请填写反馈内容</string>
+
+    <!--orderManagement模块-->
+    <string name="order_all">所有订单</string>
+    <string name="order_un_finish">未完成订单</string>
+    <string name="order_finish">已完成订单</string>
+    <string name="order_management_main_title">订单管理</string>
+    <string name="order_management_detail_title">订单详情</string>
+    <string name="order_num_title">订单编号</string>
+    <string name="gas_station_title">加油站</string>
+    <string name="car_num_title">车牌号码</string>
+    <string name="order_detail">详情 ></string>
+    <string name="user_name">姓名</string>
+    <string name="gas_type">加油类型</string>
+    <string name="gas_number">加油数量</string>
+    <string name="un_finish">未完成</string>
+
+    <!--违章查询模块-->
+    <string name="illegal_info_title">违章信息</string>
+    <string name="illegal_car_num_title">违章车牌</string>
+    <string name="illegal_behavior_title">违章行为</string>
+    <string name="illegal_address_title">违章地址</string>
+    <string name="illegal_time_title">违章时间</string>
+    <string name="illegal_fine_title">罚款</string>
+    <string name="illegal_marking_title">扣分</string>
+
+    <!--预约加油模块-->
+    <string name="periphery_gas_station_top_bar_title">周边油站</string>
+    <string name="gas_unit">(元/升)</string>
+    <string name="reservation_top_bar_title">预约加油</string>
+    <string name="choose_gas_type">选择加油类型</string>
+    <string name="number_of_gas_title">数量</string>
+    <string name="gas_number_input_hint">请输入数量</string>
+    <string name="money_unit">元</string>
+    <string name="type_90">#90</string>
+    <string name="type_97">#97</string>
+    <string name="type_93">#93</string>
+    <string name="type_0">#0</string>
+    <string name="type_92">#92</string>
+    <string name="type_95">#95</string>
+    <string name="commit_order">提交</string>
+
+    <!--设置模块相关值-->
+    <string name="auto_play_music_enable">自动播放音乐</string>
+    <string name="start_fragment_select">启动界面偏好设置</string>
+    <string name="start_with_car_service">出行服务界面</string>
+    <string name="start_with_person_center">个人中心界面</string>
+    <string name="start_with_music">音乐休闲界面</string>
+    <string name="start_with_communication">社交娱乐界面</string>
+    <string name="version_update">版本更新</string>
+    <string name="version">VL 1.0.0</string>
+    <string name="about_me">关于我们</string>
+    <string name="logout">退出登录</string>
+
+    <!--系统消息-->
+    <string name="system_msg_title">系统通知</string>
+
+    <!--dialog-->
+    <string name="about_me_content">
+        &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;网维(Wteam)团队是一支专业致力于软件开发和相
+        关产品运营的综合型团队。团队拥有一套完整的运作制度并予以落实，本软件是本团队为参加《中国软件
+        杯》而开发的产品。本产品为车联网相关主题产品，实现了车联网服务、音乐、社交、个人信息及车辆信
+        息维护等诸多模块。
+        \n\n联系方式：\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        15768861428\n&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+        865719705@qq.com
+    </string>
+    <string name="confirm">确定</string>
+    <string name="dialog_contact_way">
+    </string>
+    <string name="start_interface_select">请设置默认启动界面</string>
+    <string name="cancel">取消</string>
+    <string name="logoutConfirm">确定退出app吗？</string>
+</resources>

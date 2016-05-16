@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/item_illegal_info_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@drawable/bg_round"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/garage_image"
+            android:src="@drawable/default_car"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="176dp" />
+
+        <RelativeLayout
+            android:id="@+id/garage_relative_layout"
+            android:layout_below="@+id/garage_image"
+            android:layout_margin="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/car_sequence"
+                android:text="NO.1"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/font_size_14"
+                android:textColor="@color/carkeeper_order_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/car_sequence"
+                android:src="@drawable/garage_light"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/brand_model_number_title"
+            android:text="@string/brand_model_number_title"
+            android:layout_below="@+id/garage_relative_layout"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/textColorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/garage_brand"
+            android:text="奥迪R8"
+            android:layout_alignBaseline="@+id/brand_model_number_title"
+            android:layout_toRightOf="@+id/brand_model_number_title"
+            android:layout_marginLeft="8dp"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/model_number"
+            android:text="4.2V8FSI"
+            android:layout_alignBaseline="@+id/brand_model_number_title"
+            android:layout_toRightOf="@+id/garage_brand"
+            android:layout_marginLeft="8dp"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/license_plate_number_title"
+            android:text="@string/license_plate_number_title"
+            android:layout_below="@+id/brand_model_number_title"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/font_size_16"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/license_plate_number"
+            android:text="粤-A3806"
+            android:layout_alignBaseline="@+id/license_plate_number_title"
+            android:layout_toRightOf="@+id/license_plate_number_title"
+            android:layout_marginLeft="8dp"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/garage_detail"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_emphasize_color"
+            android:layout_below="@+id/license_plate_number_title"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:layout_width="88dp"
+            android:layout_height="32dp" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/carkeeper_main_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wteam.carkeeper.custom.TopBar
+        android:id="@+id/reservation_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        custom:top_bar_tv_1_text="@string/back"
+        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
+        custom:top_bar_tv_1_textSize="24.0"
+        custom:top_bar_tv_title_text="@string/reservation_top_bar_title"
+        custom:top_bar_tv_title_textSize="16"
+        custom:top_bar_tv_title_textColor="@color/carkeeper_text_color"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_round"
+        android:padding="8dp"
+        android:layout_margin="8dp"
+        android:layout_height="128dp">
+        <ImageView
+            android:id="@+id/location"
+            android:src="@drawable/location"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/reservation_gas_station_name"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/textColorPrimary"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/location"
+            android:text="湛江麻章呵呵大昌加油站"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/reservation_gas_station_name"
+            android:layout_toRightOf="@+id/location"
+            android:textSize="@dimen/font_size_16"
+            android:text="Herbert Li"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/reservation_gas_station_name"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/change_station"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:text="2016-04-01 08:30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorBackground"
+        android:padding="16dp"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/choose_gas_type"
+            android:text="@string/choose_gas_type"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+<!--        <RadioGroup
+            android:id="@+id/type_radio_group"
+            android:layout_below="@+id/choose_gas_type"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/type_0"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_14"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_0"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/type_90"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_14"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_90"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:id="@+id/type_92"
+                    android:gravity="center"
+                    android:layout_marginRight="8dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_92"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/type_93"
+                    android:checked="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_14"
+                    android:layout_below="@+id/type_0"
+                    android:layout_alignParentLeft="true"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_93"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/type_95"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_14"
+                    android:layout_below="@+id/type_90"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_95"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/type_97"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:layout_marginRight="8dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:layout_below="@+id/type_92"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_97"
+                    android:button="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </RadioGroup>-->
+        <LinearLayout
+            android:id="@+id/reservation_linear_layout"
+            android:layout_below="@+id/choose_gas_type"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RadioGroup
+                android:id="@+id/type_radio_group_1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/type_0"
+                    android:checked="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_0"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/type_90"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_90"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/type_92"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_92"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/type_radio_group_2"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/type_93"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_93"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/type_95"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_95"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/type_97"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:textSize="@dimen/font_size_14"
+                    android:background="@drawable/gas_type_selector"
+                    android:text="@string/type_97"
+                    android:gravity="center"
+                    android:button="@null"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/reservation_divider"
+            android:layout_below="@+id/reservation_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_height="1dp"
+            android:background="@color/colorListDivider" />
+
+        <TextView
+            android:id="@+id/number_of_gas_title"
+            android:layout_below="@+id/reservation_divider"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="16dp"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:text="@string/number_of_gas_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/number_of_gas"
+            android:background="@null"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_alignBaseline="@+id/number_of_gas_title"
+            android:layout_below="@id/reservation_divider"
+            android:layout_toRightOf="@id/number_of_gas_title"
+            android:hint="@string/gas_number_input_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_below="@+id/reservation_divider"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_margin="16dp"
+            android:text="@string/money_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.andexert.library.RippleView
+            android:layout_below="@+id/number_of_gas_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="24dp"
+            custom:rv_zoom="true"
+            custom:rv_color="@color/ripple_color"
+            custom:rv_centered="false">
+            <Button
+                android:id="@+id/btn_login_with_telephone_num"
+                android:background="@color/carkeeper_main_color"
+                android:text="@string/commit_order"
+                android:textColor="@color/carkeeper_text_color"
+                android:textSize="@dimen/font_size_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"  />
+        </com.andexert.library.RippleView>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--系统颜色-->
+    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="textColorPrimary">#4D4D4D</color>
+    <color name="colorAccent">#00BCD4</color>
+
+    <!--分割线颜色-->
+    <color name="colorListDivider">#B6B6B6</color>
+    <!--背景颜色-->
+    <color name="colorBackground">#FFFFFF</color>
+    <!--主颜色-->
+    <color name="carkeeper_main_color">#009688</color>
+    <!--次颜色-->
+    <color name="carkeeper_secondary_color">#B2DFDB</color>
+    <!--文本颜色-->
+    <color name="carkeeper_text_color">#FFFFFF</color>
+    <!--强调色-->
+    <color name="carkeeper_emphasize_color">#00BCD4</color>
+    <!--订单信息特殊颜色-->
+    <color name="carkeeper_order_1">#727272</color>
+    <color name="carkeeper_order_2">#999999</color>
+    <!--提示文字颜色-->
+    <color name="text_hint">#B2E0DB</color>
+    <!--未选中文本颜色-->
+    <color name="carkeeper_text_uncheck_color">#B2DFDB</color>
+    <!--个人中心选项背景色-->
+    <color name="person_center_bg">#EAEAEA</color>
+    <!--侧滑菜单背景颜色-->
+    <color name="drawer_bg">#FAFAFA</color>
+    <!--反馈界面背景色-->
+    <color name="feedback_bg">#EAEAEA</color>
+    <!--feedback联系方式背景色-->
+    <color name="contact_way_hint">#999999</color>
+    <!--feedback分割线颜色-->
+    <color name="feedback_line">#B6B6B6</color>
+    <!--设置界面背景-->
+    <color name="settings_main_bg">#EAEAEA</color>
+    <!--水波反馈颜色-->
+    <color name="ripple_color">#000000</color>
+    <!--系统消息标题背景色-->
+    <color name="item_title_color">#EAEAEA</color>
+    <color name="system_info_content">#FFFFFF</color>
+
+    <!--违章信息界面背景色-->
+    <color name="item_illegal_info_bg">#EAEAEA</color>
+    <!--异常颜色-->
+    <color name="abnormal_color">#CC3030</color>
+
+    <!--car_info_detail背景色-->
+    <color name="car_info_detail_bg">#EAEAEA</color>
+
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="text_color">#191919</color>
+    <color name="text_color_light">#7e7e7e</color>
+    <color name="diliver">#c7c8c8</color>
+    <color name="global_bg">#fbfcfc</color>
+    <color name="title_bg">#37bcb2</color>
+    <color name="title_bg_pressed">#99dcd7</color>
+</resources>

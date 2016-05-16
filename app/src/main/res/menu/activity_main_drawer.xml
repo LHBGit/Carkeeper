@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/menu_car_service"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_car_service"
+            android:title="@string/menu_car_service" />
+        <item
+            android:id="@+id/menu_person_center"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_person_center"
+            android:title="@string/menu_person_center" />
+
+        <item
+            android:id="@+id/menu_settings"
+            android:checkable="true"
+            android:icon="@drawable/ic_menu_settings"
+            app:itemTextColor="#FFFFFF"
+            android:title="@string/menu_settings" />
+
+        <item
+            android:title="@string/menu_title"
+            android:enabled="false">
+            <menu>
+                <item
+                    android:id="@+id/menu_ac_community"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_menu_ac_community"
+                    android:title="@string/menu_ac_community" />
+
+                <item
+                    android:id="@+id/menu_music"
+                    android:checkable="true"
+                    android:icon="@drawable/ic_menu_music"
+                    android:title="@string/menu_music" />
+            </menu>
+        </item>
+</menu>

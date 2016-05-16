@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/carkeeper_main_color"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="448">
+
+        <com.wteam.carkeeper.custom.TopBar
+            android:id="@+id/person_info_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            custom:top_bar_tv_1_text="@string/back"
+            custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
+            custom:top_bar_tv_1_textSize="24.0" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/person_center_cycle_image"
+            android:layout_marginBottom="8dp"
+            android:layout_above="@+id/nameAndGender"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/default_person_icon"
+            app:civ_border_width="3dp"
+            app:civ_border_color="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/nameAndGender"
+            android:text="CARKEEPER"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/male"
+            android:textColor="@color/carkeeper_text_color"
+            android:textSize="@dimen/font_size_16"
+            android:layout_above="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="5年"
+            android:textColor="@color/carkeeper_text_color"
+            android:layout_alignLeft="@+id/line"
+            android:drawablePadding="32dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="32dp"
+            android:drawableLeft="@drawable/person_info_car_age"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:id="@+id/line"
+            android:layout_width="1dp"
+            android:layout_marginBottom="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="24dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/carkeeper_text_color"/>
+
+        <TextView
+            android:text="王大狗"
+            android:textColor="@color/carkeeper_text_color"
+            android:layout_alignRight="@+id/line"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="32dp"
+            android:drawablePadding="32dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:drawableLeft="@drawable/person_info_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="480"
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_telephone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            custom:rv_zoom="true"
+            custom:rv_type="rectangle"
+            custom:rv_framerate="40"
+            custom:rv_color="@color/ripple_color"
+            custom:rv_centered="false">
+            <TextView
+                android:text="@string/default_telephone"
+                android:clickable="true"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/item_padding"
+                android:paddingRight="@dimen/item_padding"
+                android:drawablePadding="@dimen/textView_padding"
+                android:drawableLeft="@drawable/person_info_telephone"
+                android:drawableRight="@drawable/forward_selector"
+                android:textColor="@drawable/person_center_color_selector"
+                android:textSize="@dimen/font_size_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.andexert.library.RippleView>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_email"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            custom:rv_zoom="true"
+            custom:rv_type="rectangle"
+            custom:rv_framerate="40"
+            custom:rv_color="@color/ripple_color"
+            custom:rv_centered="false">
+            <TextView
+                android:text="@string/default_email"
+                android:clickable="true"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/item_padding"
+                android:paddingRight="@dimen/item_padding"
+                android:drawablePadding="@dimen/textView_padding"
+                android:drawableLeft="@drawable/person_info_email"
+                android:drawableRight="@drawable/forward_selector"
+                android:textColor="@drawable/person_center_color_selector"
+                android:textSize="@dimen/font_size_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.andexert.library.RippleView>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_wechat"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            custom:rv_zoom="true"
+            custom:rv_type="rectangle"
+            custom:rv_framerate="40"
+            custom:rv_color="@color/ripple_color"
+            custom:rv_centered="false">
+            <TextView
+                android:text="@string/default_weChat"
+                android:clickable="true"
+                android:gravity="left|center_vertical"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="@dimen/item_padding"
+                android:paddingRight="@dimen/item_padding"
+                android:drawablePadding="@dimen/textView_padding"
+                android:drawableLeft="@drawable/person_info_wechat"
+                android:drawableRight="@drawable/forward_selector"
+                android:textColor="@drawable/person_center_color_selector"
+                android:textSize="@dimen/font_size_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.andexert.library.RippleView>
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_change_psw"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            custom:rv_zoom="true"
+            custom:rv_type="rectangle"
+            custom:rv_framerate="40"
+            custom:rv_color="@color/ripple_color"
+            custom:rv_centered="false">
+            <TextView
+                android:text="@string/default_change_psw"
+                android:clickable="true"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/item_padding"
+                android:paddingRight="@dimen/item_padding"
+                android:drawablePadding="@dimen/textView_padding"
+                android:drawableLeft="@drawable/person_info_change_pwd"
+                android:drawableRight="@drawable/forward_selector"
+                android:textColor="@drawable/person_center_color_selector"
+                android:textSize="@dimen/font_size_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.andexert.library.RippleView>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/colorBackground"
+        android:layout_height="0dp"
+        android:layout_weight="352" />
+
+</LinearLayout>

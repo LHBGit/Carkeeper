@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:id="@+id/account"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/text_hint"
+            android:paddingLeft="@dimen/textView_padding"
+            android:paddingRight="@dimen/textView_padding"
+            android:drawableLeft="@drawable/login_with_info_account_selector"
+            android:drawablePadding="12dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:hint="@string/account"
+            android:singleLine="true" />
+
+        <AutoCompleteTextView
+            android:id="@+id/password"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/text_hint"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="12dp"
+            android:paddingLeft="@dimen/textView_padding"
+            android:paddingRight="@dimen/textView_padding"
+            android:drawableLeft="@drawable/login_psw_selector"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:singleLine="true" />
+
+        <com.andexert.library.RippleView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            custom:rv_zoom="true"
+            custom:rv_color="@color/ripple_color"
+            custom:rv_centered="false">
+                <Button
+                    android:id="@+id/btn_login_with_person_info"
+                    android:background="@color/carkeeper_main_color"
+                    android:text="@string/login"
+                    android:textColor="@color/carkeeper_text_color"
+                    android:textSize="@dimen/font_size_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </com.andexert.library.RippleView>
+</LinearLayout>

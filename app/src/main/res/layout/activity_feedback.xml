@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/feedback_bg"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wteam.carkeeper.custom.TopBar
+        android:id="@+id/feedback_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="@dimen/top_bar_padding"
+        android:paddingRight="@dimen/top_bar_padding"
+        android:background="@color/carkeeper_main_color"
+        custom:top_bar_tv_1_text="@string/back"
+        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
+        custom:top_bar_tv_1_textSize="24.0" />
+    <LinearLayout
+        android:background="@drawable/bg_round"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="424dp">
+        <TextView
+            android:text="@string/feedback_title"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/font_size_16"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:gravity="center_vertical|left"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="96"/>
+        <View
+            android:background="@color/feedback_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <EditText
+            android:id="@+id/feedback_content"
+            android:gravity="left|top"
+            android:background="@null"
+            android:padding="16dp"
+            android:hint="@string/feedback_content_hint"
+            android:textColorHint="@color/contact_way_hint"
+            android:textColor="@color/textColorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="646"/>
+
+        <View
+            android:background="@color/feedback_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="96">
+            <EditText
+                android:id="@+id/feedback_contact_way"
+                android:singleLine="true"
+                android:hint="@string/contact_way"
+                android:textSize="@dimen/font_size_11"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:background="@null"
+                android:drawableLeft="@drawable/person_info_email"
+                android:drawablePadding="8dp"
+                android:padding="8dp"
+                android:gravity="center_vertical|left"
+                android:textColorHint="@color/contact_way_hint"
+                android:textColor="@color/textColorPrimary"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="match_parent" />
+            <View
+                android:background="@color/feedback_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent" />
+
+            <com.andexert.library.RippleView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                custom:rv_zoom="true"
+                custom:rv_framerate="20"
+                custom:rv_type="rectangle"
+                custom:rv_color="@color/ripple_color"
+                custom:rv_centered="false">
+                <TextView
+                    android:id="@+id/sentFeedback"
+                    android:text="@string/send"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_14"
+                    android:textColor="@color/carkeeper_emphasize_color"
+                    android:layout_height="match_parent" />
+            </com.andexert.library.RippleView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

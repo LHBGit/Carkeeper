@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_login_main"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/carkeeper_main_color"
+    android:orientation="vertical">
+
+    <com.wteam.carkeeper.custom.TopBar
+        android:id="@+id/login_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@color/carkeeper_main_color"
+        custom:top_bar_tv_1_text="@string/back"
+        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
+        custom:top_bar_tv_1_textSize="24.0"
+        custom:top_bar_tv_5_text="@string/register"
+        custom:top_bar_tv_5_textColor="@color/carkeeper_text_color"
+        custom:top_bar_tv_5_textSize="14.0" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70">
+
+        <ImageView
+            android:id="@+id/carkeeper_logo"
+            android:layout_width="@dimen/carkeeper_logo_side_length"
+            android:layout_height="@dimen/carkeeper_logo_side_length"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/carkeeper" />
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/login_switch"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="17"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdobtn_login_with_person_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:background="@drawable/login_bg_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="@string/login_with_person_info"
+            android:textColor="@drawable/login_color_selector"
+            android:textSize="@dimen/font_size_14" />
+
+        <RadioButton
+            android:id="@+id/rdobtn_login_with_telephone_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:background="@drawable/login_bg_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="@string/login_with_teltphone_num"
+            android:textColor="@drawable/login_color_selector"
+            android:textSize="@dimen/font_size_14" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/login_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_weight="88"
+        android:background="@drawable/bg_round" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_weight="28"
+        android:layout_marginBottom="16dp"
+        android:layout_height="0dp">
+        <TextView
+            android:id="@+id/forget_password"
+            android:layout_width="56dp"
+            android:layout_height="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/forget_password"
+            android:textColor="@color/carkeeper_text_color"
+            android:textSize="@dimen/font_size_11" />
+    </RelativeLayout>
+</LinearLayout>

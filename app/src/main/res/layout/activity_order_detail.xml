@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/carkeeper_main_color"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wteam.carkeeper.custom.TopBar
+        android:id="@+id/order_detail_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        custom:top_bar_tv_1_text="@string/back"
+        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
+        custom:top_bar_tv_1_textSize="24.0"
+        custom:top_bar_tv_title_text="@string/order_management_detail_title"
+        custom:top_bar_tv_title_textSize="16"
+        custom:top_bar_tv_title_textColor="@color/carkeeper_text_color"/>
+
+    <RelativeLayout
+        android:layout_margin="8dp"
+        android:padding="16dp"
+        android:background="@drawable/bg_round"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/order_detail_num_title"
+            android:text="@string/order_num_title"
+            android:textSize="@dimen/font_size_11"
+            android:textColor="@color/carkeeper_order_1"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+        <TextView
+            android:id="@+id/order_detail_num"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="XXDD201607280909LL"
+            android:textSize="@dimen/font_size_11"
+            android:textColor="@color/carkeeper_order_2"
+            android:layout_toRightOf="@+id/order_detail_num_title"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="08:09PM"
+            android:textSize="@dimen/font_size_11"
+            android:textColor="@color/carkeeper_order_2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <View
+            android:id="@+id/order_detail_divider"
+            android:layout_marginBottom="16dp"
+            android:layout_below="@+id/order_detail_num_title"
+            android:background="@color/colorListDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <ImageView
+            android:id="@+id/qr_code"
+            android:layout_below="@+id/order_detail_divider"
+            android:src="@drawable/default_person_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_width="136dp"
+            android:layout_height="136dp" />
+
+        <TextView
+            android:id="@+id/order_detail_user_name_title"
+            android:gravity="center_vertical"
+            android:text="@string/user_name"
+            android:layout_marginLeft="8dp"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:text="车宝宝"
+            android:layout_alignLeft="@+id/qr_code"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_below="@+id/qr_code"
+            android:layout_toRightOf="@+id/order_detail_user_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/order_detail_gas_station_title"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:text="@string/gas_station_title"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/order_detail_user_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:text="湛江霞山加油站"
+            android:layout_alignLeft="@+id/qr_code"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_below="@+id/order_detail_user_name_title"
+            android:layout_toRightOf="@+id/order_detail_gas_station_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:id="@+id/order_detail_gas_type_title"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:text="@string/gas_type"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/order_detail_gas_station_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:text="95#"
+            android:layout_alignLeft="@+id/qr_code"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_below="@+id/order_detail_gas_station_title"
+            android:layout_toRightOf="@+id/order_detail_gas_number_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+        <TextView
+            android:id="@+id/order_detail_gas_number_title"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:text="@string/gas_number"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/order_detail_gas_type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:text="60元"
+            android:layout_alignLeft="@+id/qr_code"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_below="@+id/order_detail_gas_type_title"
+            android:layout_toRightOf="@+id/order_detail_gas_number_title"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp" />
+
+        <TextView
+            android:gravity="center"
+            android:text="@string/un_finish"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_emphasize_color"
+            android:layout_below="@+id/order_detail_gas_number_title"
+            android:layout_alignParentRight="true"
+            android:layout_width="88dp"
+            android:layout_height="32dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

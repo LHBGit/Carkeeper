@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="@color/system_info_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:src="@drawable/default_person_icon"
+        android:padding="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <RelativeLayout
+        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="72dp">
+
+        <TextView
+            android:text="【系统消息】"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_size_16"
+            android:paddingBottom="2dp"
+            android:gravity="bottom|left"
+            android:id="@+id/system_msg_title"
+            android:layout_above="@+id/system_msg_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:text="12:30 PM"
+            android:textSize="@dimen/font_size_11"
+            android:paddingBottom="2dp"
+            android:gravity="bottom|right"
+            android:singleLine="true"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/system_msg_content"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp" />
+
+        <TextView
+            android:text="您的车型协议更新成功！——恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭
+            喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜恭喜"
+            android:id="@+id/system_msg_content"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
+            android:textSize="@dimen/font_size_14"
+            android:paddingTop="2dp"
+            android:gravity="top|left"
+            android:paddingLeft="3dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+    </RelativeLayout>
+
+</LinearLayout>

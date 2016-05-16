@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/item_illegal_info_bg"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@drawable/bg_round"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/illegal_info_relativity_layout"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/illegal_car_num_title"
+                android:layout_centerVertical="true"
+                android:text="@string/illegal_car_num_title"
+                android:textSize="@dimen/font_size_14"
+                android:textColor="@color/textColorPrimary"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/illegal_car_num"
+                android:text="晋JH***7"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_14"
+                android:textColor="@color/carkeeper_order_1"
+                android:layout_toRightOf="@+id/illegal_car_num_title"
+                android:layout_marginLeft="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/illegal_info_image"
+                android:src="@drawable/default_person_icon"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/illegal_info_divider"
+            android:layout_below="@+id/illegal_info_relativity_layout"
+            android:background="@color/colorListDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:id="@+id/illegal_behavior_title"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/illegal_behavior_title"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_below="@+id/illegal_info_divider"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/illegal_behavior"
+            android:text="6023驾驶机动车在高速公路、城市高速公路以外的道路上不按规定车道行驶。"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_alignTop="@+id/illegal_behavior_title"
+            android:layout_toRightOf="@+id/illegal_behavior_title"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/illegal_address_title"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/illegal_address_title"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_below="@+id/illegal_behavior"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/illegal_address"
+            android:text="盛泽路出人民路北约8米"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_alignTop="@+id/illegal_address_title"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@+id/illegal_address_title"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/illegal_time_title"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/illegal_time_title"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/textColorPrimary"
+            android:layout_below="@+id/illegal_address"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/illegal_time"
+            android:text="2016-03-25 08:09PM"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_order_1"
+            android:layout_alignTop="@+id/illegal_time_title"
+            android:layout_toRightOf="@+id/illegal_time_title"
+            android:layout_marginLeft="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_below="@+id/illegal_time"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/illegal_marking"
+                android:text="-3"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_25"
+                android:textColor="@color/carkeeper_main_color"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/illegal_marking_title"
+                android:text="@string/illegal_marking_title"
+                android:layout_toLeftOf="@+id/illegal_marking"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_14"
+                android:textColor="@color/textColorPrimary"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/illegal_fine"
+                android:text="200"
+                android:layout_toLeftOf="@+id/illegal_marking_title"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_25"
+                android:textColor="@color/carkeeper_main_color"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/illegal_fine_title"
+                android:text="@string/illegal_fine_title"
+                android:layout_toLeftOf="@+id/illegal_fine"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_14"
+                android:textColor="@color/textColorPrimary"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

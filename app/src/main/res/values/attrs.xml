@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Topbar">
+        <attr name="top_bar_tv_1_text" format="string" />
+        <attr name="top_bar_tv_1_textSize" format="float" />
+        <attr name="top_bar_tv_1_bg" format="reference" />
+        <attr name="top_bar_tv_1_textColor" format="color" />
+
+        <attr name="top_bar_tv_2_text" format="string" />
+        <attr name="top_bar_tv_2_textSize" format="float" />
+        <attr name="top_bar_tv_2_bg" format="reference" />
+        <attr name="top_bar_tv_2_textColor" format="color" />
+
+        <attr name="top_bar_tv_3_text" format="string" />
+        <attr name="top_bar_tv_3_textSize" format="float" />
+        <attr name="top_bar_tv_3_bg" format="reference" />
+        <attr name="top_bar_tv_3_textColor" format="color" />
+
+
+        <attr name="top_bar_tv_4_text" format="string" />
+        <attr name="top_bar_tv_4_textSize" format="float" />
+        <attr name="top_bar_tv_4_bg" format="reference" />
+        <attr name="top_bar_tv_4_textColor" format="color" />
+
+        <attr name="top_bar_tv_5_text" format="string" />
+        <attr name="top_bar_tv_5_textSize" format="float" />
+        <attr name="top_bar_tv_5_bg" format="reference" />
+        <attr name="top_bar_tv_5_textColor" format="color" />
+
+        <attr name="top_bar_tv_title_text" format="string" />
+        <attr name="top_bar_tv_title_textSize" format="float" />
+        <attr name="top_bar_tv_title_bg" format="reference" />
+        <attr name="top_bar_tv_title_textColor" format="color" />
+    </declare-styleable>
+
+    <dimen name="top_bar_margin_horizontal">16dp</dimen>
+    <dimen name="top_bar_margin_vertical">16dp</dimen>
+    <dimen name="top_bar_tv_width_24">24dp</dimen>
+    <dimen name="top_bar_tv_width_48">48dp</dimen>
+    <dimen name="top_bar_tv_height_24">24dp</dimen>
+    <dimen name="top_bar_height">56dp</dimen>
+</resources>
