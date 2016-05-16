@@ -41,7 +41,7 @@ public class DoubleClickExitTools {
             }
             mBackToast.show();
             //延迟两秒的时间，把Runable发出去
-            mHandler.postDelayed(onBackTimeRunnable, Toast.LENGTH_SHORT);
+            mHandler.postDelayed(onBackTimeRunnable, 2000);
             return true;
         }
     }
