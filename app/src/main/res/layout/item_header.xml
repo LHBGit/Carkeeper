@@ -5,6 +5,7 @@
     android:text="2015-06-03"
     android:gravity="center_vertical|left"
     android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:textStyle="bold"
     android:textColor="@color/textColorPrimary"
     android:paddingTop="16dp"
