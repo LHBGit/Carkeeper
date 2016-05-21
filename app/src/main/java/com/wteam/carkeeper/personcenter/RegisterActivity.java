@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AutoCompleteTextView;
@@ -97,48 +96,64 @@ public class RegisterActivity extends AppCompatActivity implements TopBar.Top_ba
     public void onComplete(final RippleView rippleView) {
         rippleView.setClickable(false);
 
-        if(null == register_account) {
+        String textAccount = register_account.getText().toString().trim();
+        String textPwd1 = register_password_first.getText().toString().trim();
+        String textPwd2 = register_password_second.getText().toString().trim();
+
+        /**
+         * 参数校验
+         */
+        if("".equals(textAccount)) {
             Toast.makeText(RegisterActivity.this, "账号不能为空！", Toast.LENGTH_LONG).show();
-            return;
-        } else if(register_account.getText().toString().trim().length() < 6){
-            Toast.makeText(RegisterActivity.this, "账号长度不能小于6位！", Toast.LENGTH_LONG).show();
+            rippleView.setClickable(true);
             return;
         }
-
-        if((null == register_password_first) || (null == register_password_second)) {
+        if(textAccount.length() < 6){
+            Toast.makeText(RegisterActivity.this, "账号长度不能小于6位！", Toast.LENGTH_LONG).show();
+            rippleView.setClickable(true);
+            return;
+        }
+        if("".equals(textPwd1)) {
             Toast.makeText(RegisterActivity.this, "密码不能为空！", Toast.LENGTH_LONG).show();
+            rippleView.setClickable(true);
             return;
-        } else if(register_password_first.getText().toString().trim().length() < 6){
+        }
+        if(textPwd1.length() < 6) {
             Toast.makeText(RegisterActivity.this, "密码长度不能小于6位！", Toast.LENGTH_LONG).show();
+            rippleView.setClickable(true);
             return;
-        } else if(!register_password_first.getText().toString().trim().equals(register_password_second.getText().toString().trim())) {
+        }
+        if(!textPwd1.equals(textPwd2)) {
             Toast.makeText(RegisterActivity.this, "密码校验不一致", Toast.LENGTH_LONG).show();
+            rippleView.setClickable(true);
             return;
         }
 
         RequestParams requestParams = new RequestParams();
         SysUserVo sysUserVo = new SysUserVo();
-        sysUserVo.setAccount(register_account.getText().toString().trim());
-        sysUserVo.setPassword(register_password_first.getText().toString());
+        sysUserVo.setAccount(textAccount);
+        sysUserVo.setPassword(textPwd1);
         String json = JSON.toJSON(sysUserVo).toString();
         requestParams.add("sysUserVo",json);
 
         HttpUtil.post(UrlManagement.REGISTER_BY_USER_INFO, requestParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(RegisterActivity.this, "注册失败：" + statusCode, Toast.LENGTH_LONG).show();
-                Log.e("error",throwable.getMessage());
+                Toast.makeText(RegisterActivity.this, statusCode + responseString , Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Toast.makeText(RegisterActivity.this, "注册成功："+ responseString, Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this, statusCode + responseString, Toast.LENGTH_LONG).show();
                 finish();
             }
 
             @Override
             public void onFinish() {
                 super.onFinish();
+                register_account.setText("");
+                register_password_first.setText("");
+                register_password_second.setText("");
                 rippleView.setClickable(true);
             }
         });
