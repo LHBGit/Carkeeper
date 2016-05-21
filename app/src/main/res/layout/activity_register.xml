@@ -46,7 +46,7 @@
         android:layout_weight="105">
 
         <AutoCompleteTextView
-            android:id="@+id/account"
+            android:id="@+id/register_account"
             android:layout_marginTop="24dp"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/text_hint"
@@ -64,7 +64,7 @@
             android:singleLine="true" />
 
         <AutoCompleteTextView
-            android:id="@+id/password_first"
+            android:id="@+id/register_password_first"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/text_hint"
             android:layout_marginTop="8dp"
@@ -82,7 +82,7 @@
             android:singleLine="true" />
 
         <AutoCompleteTextView
-            android:id="@+id/password_second"
+            android:id="@+id/register_password_second"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/text_hint"
             android:layout_marginTop="8dp"
@@ -100,6 +100,7 @@
             android:singleLine="true" />
 
         <com.andexert.library.RippleView
+            android:id="@+id/rv_register_with_user_info"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="40dp"
@@ -110,7 +111,6 @@
             custom:rv_color="#000000"
             custom:rv_centered="false">
             <Button
-                android:id="@+id/btn_login_with_person_info"
                 android:background="@color/carkeeper_main_color"
                 android:text="@string/register"
                 android:textColor="@color/carkeeper_text_color"
