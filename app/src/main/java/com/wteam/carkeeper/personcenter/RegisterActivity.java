@@ -14,12 +14,12 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.andexert.library.RippleView;
-import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
 import com.wteam.carkeeper.entity.SysUserVo;
+import com.wteam.carkeeper.network.HttpUtil;
 import com.wteam.carkeeper.network.UrlManagement;
 
 import cz.msebera.android.httpclient.Header;
@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements TopBar.Top_ba
     }
 
     @Override
-    public void onComplete(RippleView rippleView) {
+    public void onComplete(final RippleView rippleView) {
         rippleView.setClickable(false);
 
         if(null == register_account) {
@@ -116,18 +116,14 @@ public class RegisterActivity extends AppCompatActivity implements TopBar.Top_ba
             return;
         }
 
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         RequestParams requestParams = new RequestParams();
         SysUserVo sysUserVo = new SysUserVo();
         sysUserVo.setAccount(register_account.getText().toString().trim());
         sysUserVo.setPassword(register_password_first.getText().toString());
         String json = JSON.toJSON(sysUserVo).toString();
-        Log.e("json",json);
         requestParams.add("sysUserVo",json);
-        //requestParams.add("sysUserVo.account",register_account.getText().toString().trim());
-        //requestParams.add("sysUserVo.password",register_password_first.getText().toString());
 
-        asyncHttpClient.post(this, UrlManagement.REGISTER_BY_USER_INFO, requestParams, new TextHttpResponseHandler() {
+        HttpUtil.post(UrlManagement.REGISTER_BY_USER_INFO, requestParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Toast.makeText(RegisterActivity.this, "注册失败：" + statusCode, Toast.LENGTH_LONG).show();
@@ -139,8 +135,12 @@ public class RegisterActivity extends AppCompatActivity implements TopBar.Top_ba
                 Toast.makeText(RegisterActivity.this, "注册成功："+ responseString, Toast.LENGTH_LONG).show();
                 finish();
             }
-        });
 
-        rippleView.setClickable(true);
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                rippleView.setClickable(true);
+            }
+        });
     }
 }
