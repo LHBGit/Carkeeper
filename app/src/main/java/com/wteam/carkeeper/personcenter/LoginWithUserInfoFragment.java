@@ -47,7 +47,7 @@ public class LoginWithUserInfoFragment extends Fragment implements RippleView.On
 
     @Override
     public void onComplete(final RippleView rippleView) {
-        rippleView.setEnabled(false);
+        rippleView.setClickable(false);
 
         final String textAccount = login_with_user_info_account.getText().toString().trim();
         final String textPassword = login_with_user_info_password.getText().toString().trim();

@@ -33,4 +33,5 @@ dependencies {
     compile project(':libzxing')
     compile files('libs/SwitchLayout1.0.jar')
     compile 'com.alibaba:fastjson:1.2.11'
+    compile files('libs/AMap_Navi_v1.8.0_20160421.jar')
 }

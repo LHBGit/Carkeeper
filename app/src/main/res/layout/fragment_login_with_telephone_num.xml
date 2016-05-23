@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <AutoCompleteTextView
-        android:id="@+id/telephone_num"
+        android:id="@+id/login_with_telephone_num_mobile_num"
         android:layout_marginTop="24dp"
         android:textColor="@color/textColorPrimary"
         android:textColorHint="@color/text_hint"
@@ -32,7 +32,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginTop="8dp">
         <AutoCompleteTextView
-            android:id="@+id/check_code"
+            android:id="@+id/login_with_telephone_num_check_code"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/text_hint"
             android:drawablePadding="12dp"
@@ -58,6 +58,7 @@
     </FrameLayout>
 
     <com.andexert.library.RippleView
+        android:id="@+id/rv_login_with_telephone_num"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="24dp"
@@ -68,7 +69,6 @@
         custom:rv_color="@color/ripple_color"
         custom:rv_centered="false">
         <Button
-            android:id="@+id/btn_login_with_telephone_num"
             android:background="@color/carkeeper_main_color"
             android:text="@string/login"
             android:textColor="@color/carkeeper_text_color"

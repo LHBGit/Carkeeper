@@ -7,7 +7,7 @@ public class UrlManagement {
     /**
      * 服务器ip地址
      */
-    public static final String BASE_URL = "http://172.16.12.98:8080/carkeeper";
+    public static final String BASE_URL = "http://192.168.32.147:8080/carkeeper";
 
     /**
      * 用户名密码注册地址
