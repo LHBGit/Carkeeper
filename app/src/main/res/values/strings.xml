@@ -138,4 +138,11 @@
     <string name="start_interface_select">请设置默认启动界面</string>
     <string name="cancel">取消</string>
     <string name="logoutConfirm">确定退出app吗？</string>
+
+    <!--地图模块-->
+    <string name="app_id">输入您讯飞的appid</string>
+    <string name="preference_default_tts_role">xiaoyan</string>
+    <string name="preference_key_tts_speed">tts_speed</string>
+    <string name="preference_key_tts_volume">tts_volume</string>
+    <string name="preference_key_tts_pitch">tts_pitch</string>
 </resources>

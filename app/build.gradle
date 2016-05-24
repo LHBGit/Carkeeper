@@ -34,4 +34,6 @@ dependencies {
     compile files('libs/SwitchLayout1.0.jar')
     compile 'com.alibaba:fastjson:1.2.11'
     compile files('libs/AMap_Navi_v1.8.0_20160421.jar')
+    compile files('libs/Msc.jar')
+    compile files('libs/AMap_Services_V2.7.0_20151125.jar')
 }

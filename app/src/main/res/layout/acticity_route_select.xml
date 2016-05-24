@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/carkeeper_main_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wteam.carkeeper.custom.TopBar
+        android:id="@+id/route_select_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingLeft="@dimen/top_bar_padding"
+        android:paddingRight="@dimen/top_bar_padding"
+        android:background="@color/carkeeper_main_color"
+        custom:top_bar_tv_1_text="@string/back"
+        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
+        custom:top_bar_tv_1_textSize="24.0"
+        custom:top_bar_tv_2_bg="@drawable/car_light"
+        custom:top_bar_tv_4_bg="@drawable/walk"/>
+
+    <LinearLayout
+        android:background="@drawable/bg_round"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/route_select_start_place"
+            android:background="@null"
+            android:hint="请输入起点"
+            android:textColor="@color/textColorPrimary"
+            android:textColorHint="@color/hint_color"
+            android:textSize="@dimen/font_size_16"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/divider_start_end_img_left"
+                android:tag="R.drawable.add_place"
+                android:src="@drawable/add_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorListDivider"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp" />
+            <ImageView
+                android:id="@+id/divider_start_end_img_right"
+                android:src="@drawable/swap_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/passing_point_1"
+            android:background="@null"
+            android:textColor="@color/textColorPrimary"
+            android:visibility="gone"
+            android:hint="请输入途经点1"
+            android:textColorHint="@color/hint_color"
+            android:textSize="@dimen/font_size_16"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <LinearLayout
+            android:id="@+id/divider_passing_point_1"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/divider_passing_point_1_img_left"
+                android:tag="R.drawable.add_place"
+                android:src="@drawable/add_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorListDivider"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/passing_point_2"
+            android:background="@null"
+            android:textColor="@color/textColorPrimary"
+            android:visibility="gone"
+            android:hint="请输入途经点2"
+            android:textColorHint="@color/hint_color"
+            android:textSize="@dimen/font_size_16"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <LinearLayout
+            android:id="@+id/divider_passing_point_2"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/divider_passing_point_2_img_left"
+                android:tag="R.drawable.add_place"
+                android:src="@drawable/add_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorListDivider"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/passing_point_3"
+            android:background="@null"
+            android:textColor="@color/textColorPrimary"
+            android:visibility="gone"
+            android:hint="请输入途经点3"
+            android:textColorHint="@color/hint_color"
+            android:textSize="@dimen/font_size_16"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+        <LinearLayout
+            android:id="@+id/divider_passing_point_3"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="24dp">
+            <View
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorListDivider"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="1dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/route_select_end_place"
+            android:background="@null"
+            android:textColor="@color/textColorPrimary"
+            android:hint="请输入终点"
+            android:textSize="@dimen/font_size_16"
+            android:textColorHint="@color/hint_color"
+            android:layout_marginLeft="56dp"
+            android:layout_marginRight="56dp"
+            android:gravity="center|left"
+            android:layout_width="match_parent"
+            android:layout_height="32dp" />
+
+
+
+        <TextView
+            android:id="@+id/route_select_search"
+            android:text="开 车 去"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:textSize="@dimen/font_size_14"
+            android:textColor="@color/carkeeper_emphasize_color"
+            android:layout_width="88dp"
+            android:layout_height="32dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

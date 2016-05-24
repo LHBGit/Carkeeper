@@ -51,6 +51,9 @@
     <!--car_info_detail背景色-->
     <color name="car_info_detail_bg">#EAEAEA</color>
 
+    <!--地图模块提示文字颜色-->
+    <color name="hint_color">#B6B6B6</color>
+
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="text_color">#191919</color>
