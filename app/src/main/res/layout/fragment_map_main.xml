@@ -14,25 +14,71 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/gas_station"
-            android:background="@drawable/ic_btn_gas_station"
-            android:layout_marginLeft="@dimen/map_button_margin"
-            android:layout_marginBottom="@dimen/map_button_margin"
-            android:layout_width="@dimen/map_button_size"
-            android:layout_height="@dimen/map_button_size"
-            android:layout_alignParentLeft="true"
-            android:layout_above="@+id/route"/>
+            <Button
+                android:id="@+id/btn_navi"
+                android:text="导航"
+                android:textColor="#727272"
+                android:visibility="gone"
+                android:background="@null"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginBottom="@dimen/map_button_margin"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_alignParentLeft="true"
+                android:layout_above="@+id/btn_clear"/>
 
-        <Button
-            android:id="@+id/route"
-            android:layout_marginLeft="@dimen/map_button_margin"
-            android:layout_marginBottom="@dimen/map_button_margin"
-            android:background="@drawable/ic_btn_route"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_width="@dimen/map_button_size"
-            android:layout_height="@dimen/map_button_size" />
+            <Button
+                android:id="@+id/btn_clear"
+                android:text="清除"
+                android:visibility="gone"
+                android:textColor="#727272"
+                android:background="@null"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginBottom="@dimen/map_button_margin"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_alignParentLeft="true"
+                android:layout_above="@+id/gas_station"/>
+
+            <Button
+                android:id="@+id/gas_station"
+                android:background="@drawable/ic_btn_gas_station"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginBottom="@dimen/map_button_margin"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size"
+                android:layout_alignParentLeft="true"
+                android:layout_above="@+id/route"/>
+
+            <Button
+                android:id="@+id/route"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/ic_btn_route"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size" />
+
+            <Button
+                android:id="@+id/zoom_in"
+                android:layout_marginRight="@dimen/map_button_margin"
+                android:layout_marginBottom="@dimen/map_button_margin"
+                android:background="@drawable/zoom_in"
+                android:layout_alignParentRight="true"
+                android:layout_above="@+id/zoom_out"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size" />
+
+            <Button
+                android:id="@+id/zoom_out"
+                android:layout_marginRight="@dimen/map_button_margin"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/zoom_out"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/map_button_size"
+                android:layout_height="@dimen/map_button_size" />
 
     </RelativeLayout>
 </FrameLayout>
