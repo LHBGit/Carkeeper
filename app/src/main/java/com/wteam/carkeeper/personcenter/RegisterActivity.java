@@ -17,7 +17,9 @@ import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
+import com.wteam.carkeeper.entity.ResultMessage;
 import com.wteam.carkeeper.entity.SysUserVo;
+import com.wteam.carkeeper.network.CodeType;
 import com.wteam.carkeeper.network.HttpUtil;
 import com.wteam.carkeeper.network.UrlManagement;
 
@@ -139,13 +141,23 @@ public class RegisterActivity extends AppCompatActivity implements TopBar.Top_ba
         HttpUtil.post(UrlManagement.REGISTER_BY_USER_INFO, requestParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(RegisterActivity.this, statusCode + responseString , Toast.LENGTH_LONG).show();
+                Toast.makeText(RegisterActivity.this,"网络连接超时，请查看确认网络是否正常连接！" , Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Toast.makeText(RegisterActivity.this, statusCode + responseString, Toast.LENGTH_LONG).show();
-                finish();
+
+                if(null != responseString) {
+                    ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
+                    if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {
+                        Toast.makeText(RegisterActivity.this,"注册成功！", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else if(CodeType.ACCOUNT_REPEAT.getCode().equals(resultMessage.getCode())) {
+                        Toast.makeText(RegisterActivity.this,"用户名已存在！", Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(RegisterActivity.this,"注册失败！", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
 
             @Override

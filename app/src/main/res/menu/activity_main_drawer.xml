@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <item
             android:id="@+id/menu_car_service"
@@ -17,12 +17,11 @@
             android:id="@+id/menu_settings"
             android:checkable="true"
             android:icon="@drawable/ic_menu_settings"
-            app:itemTextColor="#FFFFFF"
             android:title="@string/menu_settings" />
 
         <item
             android:title="@string/menu_title"
-            android:enabled="false">
+            android:enabled="true">
             <menu>
                 <item
                     android:id="@+id/menu_ac_community"

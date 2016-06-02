@@ -1,6 +1,8 @@
 package com.wteam.carkeeper.settings;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.andexert.library.RippleView;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
+import com.wteam.carkeeper.network.CarkeeperApplication;
 
 /**
  * Created by lhb on 2016/4/26.
@@ -30,6 +33,19 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private RippleView rv_about_me;
     private RippleView logout;
     private DrawerLayout drawerLayout;
+    /**
+     * 0:出行服务界面
+     * 1:个人中心界面
+     * 2:音乐休闲界面
+     * 3:社区娱乐界面
+     */
+    private int startInterface;
+    /**
+     * 是否自动播放音乐
+     */
+    private boolean isAutoPlayMusic;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Nullable
     @Override
@@ -54,11 +70,20 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
         rv_version_update.setOnRippleCompleteListener(this);
         rv_about_me.setOnRippleCompleteListener(this);
         logout.setOnRippleCompleteListener(this);
+
+        sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        startInterface = sharedPreferences.getInt("StartInterface",0);
+        isAutoPlayMusic = sharedPreferences.getBoolean("isAutoPlayMusic",false);
+        auto_play_music_switch.setChecked(isAutoPlayMusic);
+        editor  = sharedPreferences.edit();
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        Toast.makeText(getActivity(),"ischecked:"+isChecked,Toast.LENGTH_SHORT).show();
+        if(isAutoPlayMusic != isChecked) {
+            editor.putBoolean("isAutoPlayMusic",isChecked);
+            editor.commit();
+        }
     }
 
     @Override
@@ -91,27 +116,30 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
     private  void doStartInterface(RippleView rippleView) {
         AlertDialog startInterfaceDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.start_interface_select)
-                .setSingleChoiceItems(getResources().getStringArray(R.array.string_array), 0, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(getResources().getStringArray(R.array.string_array), startInterface, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(),""+which,Toast.LENGTH_SHORT).show();
+                        startInterface = which ;
                     }
                 })
                 .setPositiveButton(R.string.confirm,new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(),""+which,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(),"启动界面修改成功！",Toast.LENGTH_SHORT).show();
+                        editor.putInt("StartInterface",startInterface);
+                        editor.commit();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(),""+which,Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 })
                 .create();
+
+
         if(!startInterfaceDialog.isShowing()) {
             startInterfaceDialog.show();
         }

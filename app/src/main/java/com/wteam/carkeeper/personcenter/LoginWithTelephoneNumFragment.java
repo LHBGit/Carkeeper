@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +102,7 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
         HttpUtil.post(UrlManagement.GET_CHECK_CODE, requestParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getActivity(), statusCode + responseString, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"网络连接超时，请查看确认网络是否正常连接！" , Toast.LENGTH_LONG).show();
                 get_code.setBackgroundResource(R.drawable.get_code_light);
                 get_code.setText("");
                 v.setClickable(true);
@@ -111,27 +110,39 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Toast.makeText(getActivity(), statusCode + responseString, Toast.LENGTH_LONG).show();
-                new Thread() {
-                    @Override
-                    public void run() {
-                        for(int i=60;i>=0;i--) {
-                            try {
-                                Message message = handler.obtainMessage();
-                                message.arg1 = i;
-                                message.sendToTarget();
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                if(null != responseString) {
+                    ResultMessage resultMessage = JSON.parseObject(responseString, ResultMessage.class);
+                    if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode()))  {
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                for(int i=60;i>=0;i--) {
+                                    try {
+                                        Message message = handler.obtainMessage();
+                                        message.arg1 = i;
+                                        message.sendToTarget();
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                v.setClickable(true);
                             }
-                        }
+                        }.start();
+                    } else if(CodeType.OPERATION_FAILURE.getCode().equals(resultMessage.getCode())) {
+                        Toast.makeText(getActivity(),"重复获取验证码次数过多，请一小时后再试！",Toast.LENGTH_LONG).show();
+                        login_with_telephone_num_check_code.setBackgroundResource(R.drawable.get_code_light);
+                        login_with_telephone_num_check_code.setText("");
+                        v.setClickable(true);
+                    } else {
+                        Toast.makeText(getActivity(),"验证码获取失败！",Toast.LENGTH_LONG).show();
+                        login_with_telephone_num_check_code.setBackgroundResource(R.drawable.get_code_light);
+                        login_with_telephone_num_check_code.setText("");
                         v.setClickable(true);
                     }
-                }.start();
+                }
             }
         });
-
-
     }
 
     @Override
@@ -165,7 +176,7 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
         }
 
         RequestParams requestParams = new RequestParams();
-        final SysUserVo sysUserVo = new SysUserVo();
+        SysUserVo sysUserVo = new SysUserVo();
         sysUserVo.setTelephoneNum(mobileNum);
         sysUserVo.setTeleCheckCode(checkCode);
         String json = JSON.toJSON(sysUserVo).toString();
@@ -174,7 +185,7 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
         HttpUtil.post(UrlManagement.LOGIN_BY_TELENUM, requestParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(getActivity(), statusCode + responseString , Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"网络连接超时，请查看确认网络是否正常连接！" , Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -202,19 +213,15 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
                                 editor.putString("signature",userInfoResult.getSignature());
                                 editor.putString("carAge",userInfoResult.getCarAge());
                                 editor.commit();
-
-                                Log.e("shared:" ,sharedPreferences.getString("account","accountd"));
-                                Log.e("shared:" ,sharedPreferences.getString("telephoneNum","telephoneNumd"));
-                                Log.e("shared:" ,sharedPreferences.getString("refreshtoken","refreshtokend"));
-                                Log.e("shared:" ,sharedPreferences.getString("email","emaild"));
-                                Log.e("shared:" ,sharedPreferences.getString("iconUrl","iconUrld"));
-                                Log.e("shared:" ,sharedPreferences.getString("gender","genderd"));
-                                Log.e("shared:" ,sharedPreferences.getString("signature","signatured"));
                             }
                         }
+                        getActivity().finish();
+                    } else if(CodeType.AUTHC_FAIL.getCode().equals(resultMessage.getCode())) {
+                        Toast.makeText(getActivity(), "验证码错误！" , Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), "登陆失败！" , Toast.LENGTH_LONG).show();
                     }
                 }
-                getActivity().finish();
             }
 
             @Override

@@ -1,7 +1,9 @@
 package com.wteam.carkeeper;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +28,7 @@ import com.wteam.carkeeper.communication.CommunicationMainFragment;
 import com.wteam.carkeeper.custom.DoubleClickExitTools;
 import com.wteam.carkeeper.map.MapMainFragment;
 import com.wteam.carkeeper.music.MusicMainFragment;
+import com.wteam.carkeeper.network.CarkeeperApplication;
 import com.wteam.carkeeper.personcenter.LoginActivity;
 import com.wteam.carkeeper.personcenter.PersonCenterFragment;
 import com.wteam.carkeeper.personcenter.SystemMessageActivity;
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
 
     private DoubleClickExitTools doubleClick;
+    private MenuItem preMenuItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,13 +92,36 @@ public class MainActivity extends AppCompatActivity
         systemMsg.setOnClickListener(this);
 
         applyBlur();
-        switchContent(current,personCenterFragment);
-        navigationView.getMenu().getItem(1).setChecked(true);
+
+        /**
+         * 根据用户设置初始化首个页面
+         */
+        SharedPreferences sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        int startInterface = sharedPreferences.getInt("StartInterface",0);
+        if(startInterface == 0) {
+            preMenuItem = navigationView.getMenu().getItem(0);
+            preMenuItem.setChecked(true);
+            switchContent(current,mapMainFragment);
+        }
+        if(startInterface == 1) {
+            preMenuItem = navigationView.getMenu().getItem(1);
+            preMenuItem.setChecked(true);
+            switchContent(current,personCenterFragment);
+        }
+        if(startInterface == 2) {
+            preMenuItem = navigationView.getMenu().getItem(3).getSubMenu().getItem(1);
+            preMenuItem.setChecked(true);
+            switchContent(current,musicMainFragment);
+        }
+        if(startInterface == 3) {
+            preMenuItem = navigationView.getMenu().getItem(3).getSubMenu().getItem(0);
+            preMenuItem.setChecked(true);
+            switchContent(current,communicationMainFragment);
+        }
     }
 
     private void switchContent(Fragment from, Fragment to) {
         if(null != to && !to.equals(from)) {
-           // FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             if(!to.isAdded()) {
@@ -140,18 +167,6 @@ public class MainActivity extends AppCompatActivity
         });
     }
 
-    /**
-     * back键处理
-     */
-/*    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -166,6 +181,7 @@ public class MainActivity extends AppCompatActivity
         return super.onKeyDown(keyCode, event);
     }
 
+
     /**
      * 菜单事件监听
      */
@@ -176,25 +192,30 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.menu_car_service) {
             if (!item.isChecked()) {
+                preMenuItem.setChecked(false);
                 switchContent(current,mapMainFragment);
             }
 
         } else if (id == R.id.menu_person_center) {
             if (!item.isChecked()) {
+                preMenuItem.setChecked(false);
                 switchContent(current,personCenterFragment);
             }
 
         } else if (id == R.id.menu_settings) {
             if (!item.isChecked()) {
+                preMenuItem.setChecked(false);
                 switchContent(current,settingsFragment);
             }
         } else if (id == R.id.menu_ac_community) {
             if (!item.isChecked()) {
+                preMenuItem.setChecked(false);
                 switchContent(current,communicationMainFragment);
             }
 
         } else if (id == R.id.menu_music) {
             if (!item.isChecked()) {
+                preMenuItem.setChecked(false);
                 switchContent(current,musicMainFragment);
             }
         }

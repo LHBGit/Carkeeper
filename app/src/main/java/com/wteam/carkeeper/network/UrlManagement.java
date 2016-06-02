@@ -34,4 +34,14 @@ public class UrlManagement {
      */
     public static final String LOGIN_AUTO = BASE_URL + "/autoLogin.action";
 
+    /**
+     * 获取修改密码的短信验证码地址
+     */
+    public static final String GET_UPDATE_PASSWORD_CHECK_CODE = BASE_URL + "/getUpdatePasswordCheckCode.action";
+
+    /**
+     * 更新密码地址
+     */
+    public static final String UPDATE_PASSWORD = BASE_URL + "/updatePassword.action";
+
 }
