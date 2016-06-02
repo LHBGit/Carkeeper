@@ -62,4 +62,9 @@
     <color name="global_bg">#fbfcfc</color>
     <color name="title_bg">#37bcb2</color>
     <color name="title_bg_pressed">#99dcd7</color>
+
+    <!--音乐模块-->
+    <color name="music_name_color">#212121</color>
+    <color name="music_person_color">#727272</color>
+    <color name="music_main_bg">#FAFAFA</color>
 </resources>

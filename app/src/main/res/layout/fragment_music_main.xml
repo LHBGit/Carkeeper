@@ -1,19 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/music_main_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="音乐主界面"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2" />
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/bg_music_person"
+            android:src="@drawable/default_person_icon"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="232dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+            <TextView
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp" />
-</RelativeLayout>
+            <TextView
+                android:layout_toLeftOf="@+id/my_like"
+                android:layout_marginRight="16dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/music_download_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/my_like"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/music_search"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/play"
+            android:layout_marginTop="204dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/music_name"
+            android:text="I'm a freak"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/carkeeper_main_color"
+            android:textSize="@dimen/font_size_20"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/bg_music_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/music_person_name"
+            android:text="enrique iglesias"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/font_size_14"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/music_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/music_person_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <RadioButton
+                android:background="@drawable/my_like_selector"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:background="@drawable/local_music_selector"
+                android:layout_marginLeft="96dp"
+                android:layout_marginRight="96dp"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:background="@drawable/recent_selector"
+                android:button="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+    </RelativeLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+</LinearLayout>

@@ -16,6 +16,10 @@ public class HttpUtil {
     public static PersistentCookieStore myCookieStore = new PersistentCookieStore(CarkeeperApplication.getContext());
 
     /**
+     * 私有化构造方法
+     */
+    private HttpUtil(){}
+    /**
      * 实例话请求客户端对象
      */
     public static AsyncHttpClient client = new AsyncHttpClient();

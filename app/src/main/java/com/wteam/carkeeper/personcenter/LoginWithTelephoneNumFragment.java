@@ -1,10 +1,13 @@
 package com.wteam.carkeeper.personcenter;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +20,15 @@ import com.andexert.library.RippleView;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.wteam.carkeeper.R;
+import com.wteam.carkeeper.entity.ResultMessage;
 import com.wteam.carkeeper.entity.SysUserVo;
+import com.wteam.carkeeper.entity.UserInfoVo;
+import com.wteam.carkeeper.network.CarkeeperApplication;
+import com.wteam.carkeeper.network.CodeType;
 import com.wteam.carkeeper.network.HttpUtil;
 import com.wteam.carkeeper.network.UrlManagement;
+
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -156,7 +165,7 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
         }
 
         RequestParams requestParams = new RequestParams();
-        SysUserVo sysUserVo = new SysUserVo();
+        final SysUserVo sysUserVo = new SysUserVo();
         sysUserVo.setTelephoneNum(mobileNum);
         sysUserVo.setTeleCheckCode(checkCode);
         String json = JSON.toJSON(sysUserVo).toString();
@@ -171,6 +180,40 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Toast.makeText(getActivity(), statusCode + responseString, Toast.LENGTH_LONG).show();
+                if(null != responseString) {
+                    ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
+                    if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {
+                        Map<String,Object> map = resultMessage.getResultParm();
+                        if(map != null) {
+                            String sysUserVoJson = (String) map.get("sysUserVo");
+                            String userInfoVoJson = (String) map.get("userInfoVo");
+                            if(null != sysUserVoJson && null != userInfoVoJson) {
+                                SysUserVo sysUserVoResult = JSON.parseObject(sysUserVoJson,SysUserVo.class);
+                                UserInfoVo userInfoResult = JSON.parseObject(userInfoVoJson,UserInfoVo.class);
+
+                                SharedPreferences sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("account",sysUserVoResult.getAccount());
+                                editor.putString("telephoneNum",sysUserVoResult.getTelephoneNum());
+                                editor.putString("refreshtoken",sysUserVoResult.getRefreshtoken());
+                                editor.putString("email",userInfoResult.getEmail());
+                                editor.putString("iconUrl",userInfoResult.getIconUrl());
+                                editor.putString("gender",userInfoResult.getGender());
+                                editor.putString("signature",userInfoResult.getSignature());
+                                editor.putString("carAge",userInfoResult.getCarAge());
+                                editor.commit();
+
+                                Log.e("shared:" ,sharedPreferences.getString("account","accountd"));
+                                Log.e("shared:" ,sharedPreferences.getString("telephoneNum","telephoneNumd"));
+                                Log.e("shared:" ,sharedPreferences.getString("refreshtoken","refreshtokend"));
+                                Log.e("shared:" ,sharedPreferences.getString("email","emaild"));
+                                Log.e("shared:" ,sharedPreferences.getString("iconUrl","iconUrld"));
+                                Log.e("shared:" ,sharedPreferences.getString("gender","genderd"));
+                                Log.e("shared:" ,sharedPreferences.getString("signature","signatured"));
+                            }
+                        }
+                    }
+                }
                 getActivity().finish();
             }
 
@@ -179,7 +222,6 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
                 super.onFinish();
                 login_with_telephone_num_mobile_num.setText("");
                 login_with_telephone_num_check_code.setText("");
-
                 rippleView.setClickable(true);
             }
         });

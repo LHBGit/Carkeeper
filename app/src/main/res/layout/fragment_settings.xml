@@ -15,8 +15,7 @@
         android:paddingLeft="@dimen/top_bar_padding"
         android:paddingRight="@dimen/top_bar_padding"
         custom:top_bar_tv_1_bg="@drawable/menu"
-        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
-        custom:top_bar_tv_1_textSize="24.0" />
+        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color" />
 
     <RelativeLayout
         android:layout_width="match_parent"

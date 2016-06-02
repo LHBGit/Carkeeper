@@ -14,6 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btnEmulator"
+            android:text="模拟"
+            android:textColor="#727272"
+            android:visibility="gone"
+            android:background="@null"
+            android:layout_marginLeft="@dimen/map_button_margin"
+            android:layout_marginBottom="@dimen/map_button_margin"
+            android:layout_width="@dimen/map_button_size"
+            android:layout_height="@dimen/map_button_size"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/btn_navi"/>
+
             <Button
                 android:id="@+id/btn_navi"
                 android:text="导航"

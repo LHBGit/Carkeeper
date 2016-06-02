@@ -21,6 +21,10 @@ public class SysUserVo {
      * 短信验证码
      */
     private String teleCheckCode;
+    /**
+     * 用户标识token
+     */
+    private String refreshtoken;
 
 
     public String getAccount() {
@@ -46,5 +50,13 @@ public class SysUserVo {
     }
     public void setTeleCheckCode(String teleCheckCode) {
         this.teleCheckCode = teleCheckCode;
+    }
+
+    public String getRefreshtoken() {
+        return refreshtoken;
+    }
+
+    public void setRefreshtoken(String refreshtoken) {
+        this.refreshtoken = refreshtoken;
     }
 }

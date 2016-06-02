@@ -25,10 +25,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/route_select_start_place"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="text|textAutoComplete"
+            android:singleLine="true"
             android:background="@null"
             android:hint="请输入起点"
+            android:text="我的位置"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/hint_color"
             android:textSize="@dimen/font_size_16"
@@ -64,8 +69,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/passing_point_1"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="text|textAutoComplete"
+            android:singleLine="true"
             android:background="@null"
             android:textColor="@color/textColorPrimary"
             android:visibility="gone"
@@ -102,8 +111,12 @@
                 android:layout_height="1dp" />
         </LinearLayout>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/passing_point_2"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="text|textAutoComplete"
+            android:singleLine="true"
             android:background="@null"
             android:textColor="@color/textColorPrimary"
             android:visibility="gone"
@@ -140,8 +153,12 @@
                 android:layout_height="1dp" />
         </LinearLayout>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/passing_point_3"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="text|textAutoComplete"
+            android:singleLine="true"
             android:background="@null"
             android:textColor="@color/textColorPrimary"
             android:visibility="gone"
@@ -172,8 +189,12 @@
                 android:layout_height="1dp" />
         </LinearLayout>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/route_select_end_place"
+            android:completionThreshold="1"
+            android:imeOptions="actionDone"
+            android:inputType="text|textAutoComplete"
+            android:singleLine="true"
             android:background="@null"
             android:textColor="@color/textColorPrimary"
             android:hint="请输入终点"

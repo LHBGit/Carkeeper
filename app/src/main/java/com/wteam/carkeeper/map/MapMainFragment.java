@@ -20,14 +20,23 @@ import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.SupportMapFragment;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.overlay.DrivingRouteOverlay;
+import com.amap.api.maps.overlay.WalkRouteOverlay;
+import com.amap.api.navi.enums.NaviType;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.route.BusRouteResult;
 import com.amap.api.services.route.DrivePath;
 import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RouteSearch;
+import com.amap.api.services.route.WalkPath;
 import com.amap.api.services.route.WalkRouteResult;
 import com.wteam.carkeeper.R;
+
+import java.util.ArrayList;
 
 
 /**
@@ -47,10 +56,23 @@ public class MapMainFragment extends Fragment implements LocationSource,
     private Button zoomOut;
     private Button btnNavi;
     private Button btnClear;
+    private Button btnEmulator;
 
     private RouteSearch mRouteSearch;
     private DriveRouteResult mDriveRouteResult;
-    private DrivingRouteOverlay drivingRouteOverlay;
+    private WalkRouteResult mWalkRouteResult;
+    private DrivingRouteOverlay mDrivingRouteOverlay;
+    private WalkRouteOverlay mWalkRouteOverlay;
+
+    private LatLonPoint mStartPoint;
+    private LatLonPoint mEndPoint;
+    private ArrayList<LatLonPoint> mPassPoints;
+    private int wayFlag;
+    private LatLonPoint myLocation;
+    private Marker marker1;
+    private Marker marker2;
+    private Marker marker3;
+    private LatLonPoint[] latLonPoints = new LatLonPoint[5];
 
     @Nullable
     @Override
@@ -72,6 +94,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
         zoomOut = (Button) view.findViewById(R.id.zoom_out);
         btnNavi = (Button) view.findViewById(R.id.btn_navi);
         btnClear= (Button) view.findViewById(R.id.btn_clear);
+        btnEmulator = (Button) view.findViewById(R.id.btnEmulator);
 
         gasStation.setOnClickListener(this);
         route.setOnClickListener(this);
@@ -79,28 +102,23 @@ public class MapMainFragment extends Fragment implements LocationSource,
         zoomOut.setOnClickListener(this);
         btnNavi.setOnClickListener(this);
         btnClear.setOnClickListener(this);
+        btnEmulator.setOnClickListener(this);
 
         mRouteSearch = new RouteSearch(getActivity());
         mRouteSearch.setRouteSearchListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnEmulator:
+                doEmulator();
+                break;
             case R.id.btn_navi:
-                Intent intent1 = new Intent(getActivity(),NaviActivity.class);
-                startActivity(intent1);
-                drivingRouteOverlay.removeFromMap();
-                btnNavi.setVisibility(View.GONE);
-                btnClear.setVisibility(View.GONE);
+                doNavi();
                 break;
             case R.id.btn_clear:
-                if(null != drivingRouteOverlay) {
-                    drivingRouteOverlay.removeFromMap();
-                    btnNavi.setVisibility(View.GONE);
-                    btnClear.setVisibility(View.GONE);
-                }
+                doClear();
                 break;
             case R.id.zoom_in:
                 aMap.animateCamera(CameraUpdateFactory.zoomBy(1));
@@ -120,19 +138,101 @@ public class MapMainFragment extends Fragment implements LocationSource,
         }
     }
 
+    private void doEmulator() {
+        Intent intent = new Intent(getActivity(),NaviActivity.class);
+        intent.putExtra("naviType", NaviType.EMULATOR);
+        intent.putExtra("wayFlag",wayFlag);
+        intent.putExtra("point_0",mStartPoint);
+        intent.putExtra("point_4",mEndPoint);
+        for(int i=1;i<4;i++) {
+            intent.putExtra("point_"+i,latLonPoints[i]);
+        }
+        startActivity(intent);
+    }
+
+    private void doNavi() {
+        Intent intent = new Intent(getActivity(),NaviActivity.class);
+        intent.putExtra("naviType", NaviType.GPS);
+        intent.putExtra("wayFlag",wayFlag);
+        intent.putExtra("point_0",mStartPoint);
+        intent.putExtra("point_4",mEndPoint);
+        for(int i=1;i<4;i++) {
+            intent.putExtra("point_"+i,latLonPoints[i]);
+        }
+        startActivity(intent);
+    }
+
+    private void doClear() {
+        if(null != mDrivingRouteOverlay) {
+            mDrivingRouteOverlay.removeFromMap();
+            btnNavi.setVisibility(View.GONE);
+            btnClear.setVisibility(View.GONE);
+            btnEmulator.setVisibility(View.GONE);
+        }
+
+        if(null != mWalkRouteOverlay) {
+            mWalkRouteOverlay.removeFromMap();
+            btnNavi.setVisibility(View.GONE);
+            btnClear.setVisibility(View.GONE);
+            btnEmulator.setVisibility(View.GONE);
+        }
+
+        if(null != marker1) {
+            marker1.remove();
+        }
+        if(null != marker2) {
+            marker2.remove();
+        }
+        if(null != marker3) {
+            marker3.remove();
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(getActivity(),"" + requestCode,Toast.LENGTH_LONG).show();
-        //NaviLatLng mEndLatlng = new NaviLatLng(21.149657 ,110.31150);
-        //NaviLatLng mStartLatlng = new NaviLatLng(21.149727, 110.30128);
-        LatLonPoint mStartPoint = new LatLonPoint(21.149727 , 110.30128);
-        LatLonPoint mEndPoint = new LatLonPoint(21.149657 ,110.31150);
-        final RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
-                mStartPoint, mEndPoint);
-        RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DrivingDefault, null,
-                null, "");// 第一个参数表示路径规划的起点和终点，第二个参数表示驾车模式，第三个参数表示途经点，第四个参数表示避让区域，第五个参数表示避让道路
-        mRouteSearch.calculateDriveRouteAsyn(query);// 异步路径规划驾车模式查询
+
+        if(requestCode == 1 && resultCode == getActivity().RESULT_OK) {
+            wayFlag = (int) data.getExtras().get("wayFlag");
+            mPassPoints = new ArrayList<>();
+
+            mStartPoint = (LatLonPoint) data.getExtras().get("point_0");
+            if((mStartPoint.getLatitude() == -1) && (mStartPoint.getLongitude() == -1)) {
+                mStartPoint = myLocation;
+            }
+            latLonPoints[0] = mStartPoint;
+
+            mEndPoint = (LatLonPoint) data.getExtras().get("point_4");
+            if((mEndPoint.getLatitude() == -1) && (mEndPoint.getLongitude() == -1)) {
+                mEndPoint = myLocation;
+            }
+            latLonPoints[4] = mEndPoint;
+
+            for (int i=1;i<4;i++) {
+                LatLonPoint latLonPoint = (LatLonPoint) data.getExtras().get("point_" + i);
+                if(latLonPoint != null) {
+                    if((latLonPoint.getLatitude() == -1) && (latLonPoint.getLongitude() == -1)) {
+                        latLonPoint = myLocation;
+                    }
+                    mPassPoints.add(latLonPoint);
+                }
+                latLonPoints[i] = latLonPoint;
+            }
+
+            RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(
+                    mStartPoint, mEndPoint);
+            if(wayFlag == RouteSelectActivity.WAY_FLAG_DRIVE) {
+                RouteSearch.DriveRouteQuery query = new RouteSearch.DriveRouteQuery(fromAndTo, RouteSearch.DrivingDefault, mPassPoints,
+                        null, "");// 第一个参数表示路径规划的起点和终点，第二个参数表示驾车模式，第三个参数表示途经点，第四个参数表示避让区域，第五个参数表示避让道路
+                mRouteSearch.calculateDriveRouteAsyn(query);// 异步路径规划驾车模式查询
+
+            }
+
+            if(wayFlag == RouteSelectActivity.WAT_FLAG_WALK) {
+                RouteSearch.WalkRouteQuery query = new RouteSearch.WalkRouteQuery(fromAndTo,RouteSearch.WalkDefault);
+                mRouteSearch.calculateWalkRouteAsyn(query);
+            }
+        }
     }
 
     /**
@@ -140,10 +240,10 @@ public class MapMainFragment extends Fragment implements LocationSource,
      */
     private void setUpMap() {
         aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
         aMap.getUiSettings().setZoomControlsEnabled(false);
+        aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
         aMap.getUiSettings().setLogoPosition(AMapOptions.LOGO_POSITION_BOTTOM_RIGHT);
-        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        //aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         aMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
     }
@@ -153,11 +253,14 @@ public class MapMainFragment extends Fragment implements LocationSource,
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
-                Log.e("position:",aMapLocation.toStr());
+                myLocation = new LatLonPoint(aMapLocation.getLatitude(),aMapLocation.getLongitude());
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+
+                Log.e("location",aMapLocation.toStr());
+
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode()+ ": " + aMapLocation.getErrorInfo();
-                Log.e("AmapErr",errText);
+                Toast.makeText(getActivity(),errText,Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -172,7 +275,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
             mlocationClient.setLocationListener(this);
             //设置为高精度定位模式
             mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            mLocationOption.setInterval(5000);
+            mLocationOption.setInterval(10000);
             mLocationOption.setNeedAddress(false);
             //设置定位参数
             mlocationClient.setLocationOption(mLocationOption);
@@ -203,7 +306,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
         if(hidden) {
             deactivate();
         } else {
-            setUpMap();
+            aMap.setMyLocationEnabled(true);
         }
     }
 
@@ -215,7 +318,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
         }
 
         if(!isHidden()) {
-            setUpMap();
+            aMap.setMyLocationEnabled(true);
         }
     }
 
@@ -252,21 +355,42 @@ public class MapMainFragment extends Fragment implements LocationSource,
     @Override
     public void onDriveRouteSearched(DriveRouteResult result, int errorCode) {
         aMap.clear();// 清理地图上的所有覆盖物
-        if (errorCode == 0) {
+        if (errorCode == 1000) {
             if (result != null && result.getPaths() != null) {
                 if (result.getPaths().size() > 0) {
                     mDriveRouteResult = result;
                     final DrivePath drivePath = mDriveRouteResult.getPaths()
                             .get(0);
-                    drivingRouteOverlay = new DrivingRouteOverlay(
+                    mDrivingRouteOverlay = new DrivingRouteOverlay(
                             getActivity(), aMap, drivePath,
                             mDriveRouteResult.getStartPos(),
                             mDriveRouteResult.getTargetPos());
-                    drivingRouteOverlay.removeFromMap();
-                    drivingRouteOverlay.addToMap();
-                    drivingRouteOverlay.zoomToSpan();
+
+                    mDrivingRouteOverlay.removeFromMap();
+                    mDrivingRouteOverlay.addToMap();
+                    mDrivingRouteOverlay.zoomToSpan();
                     btnNavi.setVisibility(View.VISIBLE);
                     btnClear.setVisibility(View.VISIBLE);
+                    btnEmulator.setVisibility(View.VISIBLE);
+
+                    LatLonPoint passPoint1 = mPassPoints.get(0);
+                    if(null != passPoint1) {
+                        marker1 = aMap.addMarker(new MarkerOptions().position(new LatLng(
+                                passPoint1.getLatitude(),passPoint1.getLongitude()))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pass_point_1)));
+                    }
+                    LatLonPoint passPoint2 = mPassPoints.get(1);
+                    if(null != passPoint2) {
+                        marker2 = aMap.addMarker( new MarkerOptions().position(new LatLng(
+                                passPoint2.getLatitude(),passPoint2.getLongitude()))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pass_point_2)));
+                    }
+                    LatLonPoint passPoint3 = mPassPoints.get(2);
+                    if(null != passPoint3) {
+                        marker3 =  aMap.addMarker(new MarkerOptions().position(new LatLng(
+                                passPoint3.getLatitude(),passPoint3.getLongitude()))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pass_point_3)));
+                    }
                 } else if (result != null && result.getPaths() == null) {
                     Toast.makeText(getActivity(),"无结果",Toast.LENGTH_LONG).show();
                 }
@@ -280,7 +404,35 @@ public class MapMainFragment extends Fragment implements LocationSource,
     }
 
     @Override
-    public void onWalkRouteSearched(WalkRouteResult walkRouteResult, int i) {
+    public void onWalkRouteSearched(WalkRouteResult result, int errorCode) {
+        aMap.clear();// 清理地图上的所有覆盖物
+        if (errorCode == 1000) {
+            if (result != null && result.getPaths() != null) {
+                if (result.getPaths().size() > 0) {
+                    mWalkRouteResult = result;
+                     WalkPath walkPath = mWalkRouteResult.getPaths()
+                            .get(0);
+                    mWalkRouteOverlay = new WalkRouteOverlay(
+                            getActivity(),aMap,walkPath,
+                            mWalkRouteResult.getStartPos(),
+                            mWalkRouteResult.getTargetPos());
 
+                    mWalkRouteOverlay.removeFromMap();
+                    mWalkRouteOverlay.addToMap();
+                    mWalkRouteOverlay.zoomToSpan();
+                    btnNavi.setVisibility(View.VISIBLE);
+                    btnClear.setVisibility(View.VISIBLE);
+                    btnEmulator.setVisibility(View.VISIBLE);
+
+                } else if (result != null && result.getPaths() == null) {
+                    Toast.makeText(getActivity(),"无结果",Toast.LENGTH_LONG).show();
+                }
+
+            } else {
+                Toast.makeText(getActivity(),"无结果",Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(getActivity(),"错误码："+errorCode,Toast.LENGTH_LONG).show();
+        }
     }
 }
