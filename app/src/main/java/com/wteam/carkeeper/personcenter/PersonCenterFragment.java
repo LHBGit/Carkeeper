@@ -1,6 +1,8 @@
 package com.wteam.carkeeper.personcenter;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,10 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.andexert.library.RippleView;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
+import com.wteam.carkeeper.network.CarkeeperApplication;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by lhb on 2016/4/26.
@@ -28,13 +34,24 @@ public class PersonCenterFragment extends Fragment implements TopBar.Top_bar_tv_
     private RippleView rv_feedback;
     private DrawerLayout drawerLayout;
     private ImageView person_center_system_msg;
+    private TextView person_center_account;
+    private TextView person_center_email;
+    private SharedPreferences sharedPreferences;
+    private CircleImageView person_center_cycle_image;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personcenter_main,container,false);
         initView(view);
+        init();
         return view;
+    }
+
+    private void init() {
+        sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        person_center_account.setText(sharedPreferences.getString("account","CARKEEPER"));
+        person_center_email.setText(sharedPreferences.getString("email","865719705@qq.com"));
     }
 
     private void initView(View view) {
@@ -46,6 +63,9 @@ public class PersonCenterFragment extends Fragment implements TopBar.Top_bar_tv_
         rv_feedback = (RippleView) view.findViewById(R.id.rv_feedback);
         person_center_system_msg = (ImageView) view.findViewById(R.id.person_center_system_msg);
         drawerLayout = (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
+        person_center_account = (TextView) view.findViewById(R.id.person_center_account);
+        person_center_email = (TextView) view.findViewById(R.id.person_center_email);
+        person_center_cycle_image = (CircleImageView) view.findViewById(R.id.person_center_cycle_image);
 
 
         person_center_top_bar.setOnTop_bar_tv_1_ClickListener(this);
@@ -55,6 +75,7 @@ public class PersonCenterFragment extends Fragment implements TopBar.Top_bar_tv_
         rv_illegal_check.setOnRippleCompleteListener(this);
         rv_feedback.setOnRippleCompleteListener(this);
         person_center_system_msg.setOnClickListener(this);
+        person_center_cycle_image.setOnClickListener(this);
     }
 
     @Override
@@ -76,6 +97,8 @@ public class PersonCenterFragment extends Fragment implements TopBar.Top_bar_tv_
             case R.id.rv_feedback:
                 gotoActivity(FeedbackActivity.class);
                 break;
+            case R.id.person_center_cycle_image:
+                break;
             default:break;
         }
         rippleView.setClickable(true);
@@ -92,7 +115,7 @@ public class PersonCenterFragment extends Fragment implements TopBar.Top_bar_tv_
         if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.openDrawer(GravityCompat.START);
         }
-        view.setClickable(false);
+        view.setClickable(true);
     }
 
     @Override

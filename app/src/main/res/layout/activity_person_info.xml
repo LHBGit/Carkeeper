@@ -40,7 +40,6 @@
             android:text="CARKEEPER"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:paddingLeft="16dp"
             android:layout_centerHorizontal="true"
             android:drawableRight="@drawable/male"
             android:textColor="@color/carkeeper_text_color"
@@ -50,10 +49,10 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/person_info_car_age"
             android:text="5年"
             android:textColor="@color/carkeeper_text_color"
             android:layout_alignLeft="@+id/line"
-            android:drawablePadding="32dp"
             android:gravity="center"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="32dp"
@@ -71,12 +70,12 @@
             android:background="@color/carkeeper_text_color"/>
 
         <TextView
+            android:id="@+id/person_info_username"
             android:text="王大狗"
             android:textColor="@color/carkeeper_text_color"
             android:layout_alignRight="@+id/line"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="32dp"
-            android:drawablePadding="32dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:drawableLeft="@drawable/person_info_account"
@@ -84,119 +83,111 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="480"
-        android:background="@color/colorBackground"
-        android:orientation="vertical">
-        <com.andexert.library.RippleView
-            android:id="@+id/rv_telephone"
+        android:layout_weight="832"
+        android:background="@color/colorBackground">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            custom:rv_zoom="true"
-            custom:rv_type="rectangle"
-            custom:rv_framerate="40"
-            custom:rv_color="@color/ripple_color"
-            custom:rv_centered="false">
-            <TextView
-                android:text="@string/default_telephone"
-                android:clickable="true"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="@dimen/item_padding"
-                android:paddingRight="@dimen/item_padding"
-                android:drawablePadding="@dimen/textView_padding"
-                android:drawableLeft="@drawable/person_info_telephone"
-                android:drawableRight="@drawable/forward_selector"
-                android:textColor="@drawable/person_center_color_selector"
-                android:textSize="@dimen/font_size_16"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.andexert.library.RippleView
+                android:id="@+id/rv_telephone"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.andexert.library.RippleView>
+                android:layout_height="56dp"
+                custom:rv_zoom="true"
+                custom:rv_type="rectangle"
+                custom:rv_framerate="40"
+                custom:rv_color="@color/ripple_color"
+                custom:rv_centered="false">
+                <TextView
+                    android:text="@string/default_telephone"
+                    android:clickable="true"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/item_padding"
+                    android:paddingRight="@dimen/item_padding"
+                    android:drawablePadding="@dimen/textView_padding"
+                    android:drawableLeft="@drawable/person_info_telephone"
+                    android:drawableRight="@drawable/forward_selector"
+                    android:textColor="@drawable/person_center_color_selector"
+                    android:textSize="@dimen/font_size_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.andexert.library.RippleView>
 
-        <com.andexert.library.RippleView
-            android:id="@+id/rv_email"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            custom:rv_zoom="true"
-            custom:rv_type="rectangle"
-            custom:rv_framerate="40"
-            custom:rv_color="@color/ripple_color"
-            custom:rv_centered="false">
-            <TextView
-                android:text="@string/default_email"
-                android:clickable="true"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="@dimen/item_padding"
-                android:paddingRight="@dimen/item_padding"
-                android:drawablePadding="@dimen/textView_padding"
-                android:drawableLeft="@drawable/person_info_email"
-                android:drawableRight="@drawable/forward_selector"
-                android:textColor="@drawable/person_center_color_selector"
-                android:textSize="@dimen/font_size_16"
+            <com.andexert.library.RippleView
+                android:id="@+id/rv_email"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </com.andexert.library.RippleView>
+                android:layout_height="56dp"
+                custom:rv_zoom="true"
+                custom:rv_type="rectangle"
+                custom:rv_framerate="40"
+                custom:rv_color="@color/ripple_color"
+                custom:rv_centered="false">
+                <TextView
+                    android:text="@string/default_email"
+                    android:clickable="true"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/item_padding"
+                    android:paddingRight="@dimen/item_padding"
+                    android:drawablePadding="@dimen/textView_padding"
+                    android:drawableLeft="@drawable/person_info_email"
+                    android:drawableRight="@drawable/forward_selector"
+                    android:textColor="@drawable/person_center_color_selector"
+                    android:textSize="@dimen/font_size_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.andexert.library.RippleView>
 
-        <com.andexert.library.RippleView
-            android:id="@+id/rv_wechat"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            custom:rv_zoom="true"
-            custom:rv_type="rectangle"
-            custom:rv_framerate="40"
-            custom:rv_color="@color/ripple_color"
-            custom:rv_centered="false">
-            <TextView
-                android:text="@string/default_weChat"
-                android:clickable="true"
-                android:gravity="left|center_vertical"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="@dimen/item_padding"
-                android:paddingRight="@dimen/item_padding"
-                android:drawablePadding="@dimen/textView_padding"
-                android:drawableLeft="@drawable/person_info_wechat"
-                android:drawableRight="@drawable/forward_selector"
-                android:textColor="@drawable/person_center_color_selector"
-                android:textSize="@dimen/font_size_16"
+            <com.andexert.library.RippleView
+                android:id="@+id/rv_wechat"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </com.andexert.library.RippleView>
+                android:layout_height="56dp"
+                custom:rv_zoom="true"
+                custom:rv_type="rectangle"
+                custom:rv_framerate="40"
+                custom:rv_color="@color/ripple_color"
+                custom:rv_centered="false">
+                <TextView
+                    android:text="@string/default_weChat"
+                    android:clickable="true"
+                    android:gravity="left|center_vertical"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="@dimen/item_padding"
+                    android:paddingRight="@dimen/item_padding"
+                    android:drawablePadding="@dimen/textView_padding"
+                    android:drawableLeft="@drawable/person_info_wechat"
+                    android:drawableRight="@drawable/forward_selector"
+                    android:textColor="@drawable/person_center_color_selector"
+                    android:textSize="@dimen/font_size_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.andexert.library.RippleView>
 
-        <com.andexert.library.RippleView
-            android:id="@+id/rv_change_psw"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            custom:rv_zoom="true"
-            custom:rv_type="rectangle"
-            custom:rv_framerate="40"
-            custom:rv_color="@color/ripple_color"
-            custom:rv_centered="false">
-            <TextView
-                android:text="@string/default_change_psw"
-                android:clickable="true"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="@dimen/item_padding"
-                android:paddingRight="@dimen/item_padding"
-                android:drawablePadding="@dimen/textView_padding"
-                android:drawableLeft="@drawable/person_info_change_pwd"
-                android:drawableRight="@drawable/forward_selector"
-                android:textColor="@drawable/person_center_color_selector"
-                android:textSize="@dimen/font_size_16"
+            <com.andexert.library.RippleView
+                android:id="@+id/rv_change_psw"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </com.andexert.library.RippleView>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:background="@color/colorBackground"
-        android:layout_height="0dp"
-        android:layout_weight="352" />
-
+                android:layout_height="56dp"
+                custom:rv_zoom="true"
+                custom:rv_type="rectangle"
+                custom:rv_framerate="40"
+                custom:rv_color="@color/ripple_color"
+                custom:rv_centered="false">
+                <TextView
+                    android:text="@string/default_change_psw"
+                    android:clickable="true"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="@dimen/item_padding"
+                    android:paddingRight="@dimen/item_padding"
+                    android:drawablePadding="@dimen/textView_padding"
+                    android:drawableLeft="@drawable/person_info_change_pwd"
+                    android:drawableRight="@drawable/forward_selector"
+                    android:textColor="@drawable/person_center_color_selector"
+                    android:textSize="@dimen/font_size_16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.andexert.library.RippleView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

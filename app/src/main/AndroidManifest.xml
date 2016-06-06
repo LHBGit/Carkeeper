@@ -29,6 +29,9 @@
             android:name="com.amap.api.v2.apikey"
             android:value="af6a373cc47c154bbe385e0bcc9d9c9d" />
 
+
+        <activity android:name=".example.MainActivity">
+        </activity>
         <activity android:name=".map.NaviActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
@@ -101,7 +104,8 @@
         <activity
             android:name=".personcenter.ReservationActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
         <activity
             android:name=".personcenter.IllegalInfoActivity"
@@ -118,8 +122,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
-        <service android:name="com.amap.api.location.APSService" />
+        <service android:name="com.amap.api.location.APSService" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 

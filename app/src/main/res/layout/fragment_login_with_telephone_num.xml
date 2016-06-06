@@ -69,6 +69,7 @@
         custom:rv_color="@color/ripple_color"
         custom:rv_centered="false">
         <Button
+            android:id="@+id/btn_login_with_telephone_num"
             android:background="@color/carkeeper_main_color"
             android:text="@string/login"
             android:textColor="@color/carkeeper_text_color"

@@ -82,6 +82,7 @@
                 android:layout_height="match_parent" />
 
             <com.andexert.library.RippleView
+                android:id="@+id/rv_sentFeedback"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="match_parent"
@@ -91,7 +92,6 @@
                 custom:rv_color="@color/ripple_color"
                 custom:rv_centered="false">
                 <TextView
-                    android:id="@+id/sentFeedback"
                     android:text="@string/send"
                     android:layout_width="match_parent"
                     android:gravity="center"

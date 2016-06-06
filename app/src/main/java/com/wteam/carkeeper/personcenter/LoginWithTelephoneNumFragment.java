@@ -136,8 +136,8 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
                         v.setClickable(true);
                     } else {
                         Toast.makeText(getActivity(),"验证码获取失败！",Toast.LENGTH_LONG).show();
-                        login_with_telephone_num_check_code.setBackgroundResource(R.drawable.get_code_light);
-                        login_with_telephone_num_check_code.setText("");
+                        get_code.setBackgroundResource(R.drawable.get_code_light);
+                        get_code.setText("");
                         v.setClickable(true);
                     }
                 }
@@ -190,7 +190,6 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Toast.makeText(getActivity(), statusCode + responseString, Toast.LENGTH_LONG).show();
                 if(null != responseString) {
                     ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
                     if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {

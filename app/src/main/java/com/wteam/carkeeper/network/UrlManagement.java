@@ -44,4 +44,28 @@ public class UrlManagement {
      */
     public static final String UPDATE_PASSWORD = BASE_URL + "/updatePassword.action";
 
+    /**
+     * 获取附近加油站地址
+     */
+    public static final String GET_NEARLY_GAS_STATION = "http://apis.juhe.cn/oil/local";
+
+    /**
+     * 获取更新手机号码的验证码地址
+     */
+    public static final String GET_UPDATE_TELEPHONE_NUM_CHECK_CODE = BASE_URL + "/getUpdateTelephoneNumCheckCode.action";
+
+    /**
+     * 更新手机号码地址
+     */
+    public static final String UPDATE_TELEPHONE_NUM = BASE_URL + "/updateTelephone.action";
+
+    /**
+     * 登陆后更新密码地址
+     */
+    public static final String UPDATE_PASSWORD_AFTER_LOGIN = BASE_URL + "/updatePasswordAfterLogin.action";
+
+    /**
+     * 保存反馈信息接口
+     */
+    public static final String SAVE_FEEDBACK_INFO = BASE_URL + "/saveFeedbackInfo.action";
 }

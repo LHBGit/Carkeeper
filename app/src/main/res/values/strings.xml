@@ -39,9 +39,9 @@
     <string name="order_management">订单管理</string>
     <string name="feedback">意见反馈</string>
     <string name="illegal_check">违章查询</string>
-    <string name="default_telephone">未绑定</string>
-    <string name="default_email">未绑定</string>
-    <string name="default_weChat">未绑定</string>
+    <string name="default_telephone">手机号码（未绑定）</string>
+    <string name="default_email">邮箱（未绑定）</string>
+    <string name="default_weChat">微信（未绑定）</string>
     <string name="default_change_psw">修改密码</string>
 
     <!--garage模块-->
@@ -63,7 +63,7 @@
 
     <!--feedback模块-->
     <string name="feedback_title">意见反馈</string>
-    <string name="contact_way">您的联系方式：QQ\电话\邮箱</string>
+    <string name="contact_way">您的联系方式：QQ|电话|邮箱</string>
     <string name="send">发送</string>
     <string name="feedback_content_hint">请填写反馈内容</string>
 
@@ -99,12 +99,6 @@
     <string name="number_of_gas_title">数量</string>
     <string name="gas_number_input_hint">请输入数量</string>
     <string name="money_unit">元</string>
-    <string name="type_90">#90</string>
-    <string name="type_97">#97</string>
-    <string name="type_93">#93</string>
-    <string name="type_0">#0</string>
-    <string name="type_92">#92</string>
-    <string name="type_95">#95</string>
     <string name="commit_order">提交</string>
 
     <!--设置模块相关值-->

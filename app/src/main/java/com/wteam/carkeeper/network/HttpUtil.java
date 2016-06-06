@@ -27,6 +27,7 @@ public class HttpUtil {
     static {
         client.setTimeout(10000); // 设置链接超时，如果不设置，默认为10s
         client.setCookieStore(myCookieStore);
+        client.setEnableRedirects(true);
     }
 
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

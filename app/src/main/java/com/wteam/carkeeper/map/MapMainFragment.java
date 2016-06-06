@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -18,6 +19,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.CoordinateConverter;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.SupportMapFragment;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
@@ -34,16 +36,27 @@ import com.amap.api.services.route.DriveRouteResult;
 import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkPath;
 import com.amap.api.services.route.WalkRouteResult;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.wteam.carkeeper.R;
+import com.wteam.carkeeper.entity.StationInfo;
+import com.wteam.carkeeper.network.HttpUtil;
+import com.wteam.carkeeper.network.UrlManagement;
+import com.wteam.carkeeper.personcenter.ReservationActivity;
+import com.wteam.carkeeper.util.LocationChangeTools;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 
 /**
  * Created by lhb on 2016/4/26.
  */
 public class MapMainFragment extends Fragment implements LocationSource,
-        AMapLocationListener,View.OnClickListener,RouteSearch.OnRouteSearchListener{
+        AMapLocationListener,View.OnClickListener,RouteSearch.OnRouteSearchListener,
+        AMap.OnMarkerClickListener,AMap.OnInfoWindowClickListener{
 
     private AMap aMap;
     private SupportMapFragment supportMapFragment;
@@ -73,6 +86,10 @@ public class MapMainFragment extends Fragment implements LocationSource,
     private Marker marker2;
     private Marker marker3;
     private LatLonPoint[] latLonPoints = new LatLonPoint[5];
+
+    private boolean isShowGasStatioin = false;
+    private String stationInfoJson;
+    private Marker preMarker;
 
     @Nullable
     @Override
@@ -127,7 +144,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
                 aMap.animateCamera(CameraUpdateFactory.zoomBy(-1));
                 break;
             case R.id.gas_station:
-                Toast.makeText(getActivity(),"gas_station",Toast.LENGTH_LONG).show();
+                doGasStation(v);
                 break;
             case R.id.route:
                 Intent intent = new Intent(getActivity(),RouteSelectActivity.class);
@@ -135,6 +152,105 @@ public class MapMainFragment extends Fragment implements LocationSource,
                 break;
             default:
                 break;
+        }
+    }
+
+    private void doGasStation(final View v) {
+        v.setClickable(false);
+        if(isShowGasStatioin) {
+            Log.e("clear--ture","clear" + isShowGasStatioin);
+            aMap.clear();
+            aMap.setMyLocationEnabled(true);
+            isShowGasStatioin = !isShowGasStatioin;
+            v.setClickable(true);
+        } else {
+            if(myLocation != null) {
+                LatLng latLng = LocationChangeTools.gd2bd(new LatLng(myLocation.getLatitude(),myLocation.getLongitude()));;
+
+                RequestParams requestParams = new RequestParams();
+                requestParams.put("key","b3d026896621d18b250a6fc12163f922");
+                requestParams.put("lon",latLng.longitude);
+                requestParams.put("lat",latLng.latitude);
+                requestParams.put("format","1");
+                requestParams.put("r","5000");
+                final CoordinateConverter converter = new CoordinateConverter(getActivity());
+                converter.from(CoordinateConverter.CoordType.BAIDU);
+
+                HttpUtil.post(UrlManagement.GET_NEARLY_GAS_STATION, requestParams, new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Toast.makeText(getActivity(),"网络连接超时，请确认网络正常连接！",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        if(statusCode == 200) {
+                            if(null != responseString) {
+                                StationInfo stationInfo = JSON.parseObject(responseString, StationInfo.class);
+
+                                if(0 == stationInfo.getError_code() && ("200".equals(stationInfo.getResultcode()))) {
+                                    Log.e("clear--false","clear" + isShowGasStatioin);
+                                    isShowGasStatioin = !isShowGasStatioin;
+                                    mlocationClient.stopLocation();
+                                    stationInfoJson = responseString;
+
+                                    List<StationInfo.ResultBean.DataBean> dataBeans = stationInfo.getResult().getData();
+                                    for (StationInfo.ResultBean.DataBean dataBean : dataBeans) {
+                                        double lat = Double.valueOf(dataBean.getLat());
+                                        double lng = Double.valueOf(dataBean.getLon());
+                                        LatLng latlng = converter.coord(new LatLng(lat, lng)).convert();
+
+                                        /**
+                                         * 拼接价格字符串
+                                         */
+                                        StringBuffer stringBuffer = new StringBuffer();
+                                        String price = dataBean.getPrice();
+                                        String gastPrice = dataBean.getGastprice();
+                                        if(price != null && !"".equals(price) && !"{}".equals(price)) {
+                                            price = price.replace("{","");
+                                            price = price.replace("}","");
+                                            price = price.replace("\"","");
+                                            String[] typeAndPrice = price.split(",");
+                                            for(int i=0;i<typeAndPrice.length;i++) {
+                                                stringBuffer.append("[" + typeAndPrice[i]+ "]");
+                                            }
+                                        }
+
+                                        if(gastPrice != null && !"".equals(gastPrice) && !"{}".equals(gastPrice)) {
+                                            gastPrice = gastPrice.replace("{","");
+                                            gastPrice = gastPrice.replace("}","");
+                                            gastPrice = gastPrice.replace("\"","");
+                                            String[] typeAndGasPrice = gastPrice.split(",");
+                                            for(int i=0;i<typeAndGasPrice.length;i++) {
+                                                stringBuffer.append("[" + typeAndGasPrice[i]+ "]");
+                                            }
+                                        }
+
+                                        aMap.addMarker(new MarkerOptions().position(latlng)
+                                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.gas_station)).
+                                                        title(dataBean.getName() + "\t距离：" + dataBean.getDistance())
+                                                        .snippet("\t折扣信息：" + dataBean.getDiscount() + "\t价格：" + stringBuffer.toString()
+                                                        + "\n地址：" + dataBean.getAddress())).setObject(dataBean);
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(getActivity(),"定位失败，请稍后再试！",Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(),"定位失败，请稍后再试！",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                        v.setClickable(true);
+                    }
+                });
+            } else {
+                Toast.makeText(getActivity(),"定位失败，请稍后再试！",Toast.LENGTH_LONG).show();
+                v.setClickable(true);
+            }
         }
     }
 
@@ -186,6 +302,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
         if(null != marker3) {
             marker3.remove();
         }
+        aMap.setMyLocationEnabled(true);
     }
 
     @Override
@@ -246,6 +363,9 @@ public class MapMainFragment extends Fragment implements LocationSource,
         //aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         aMap.setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
+
+        aMap.setOnMarkerClickListener(this);
+        aMap.setOnInfoWindowClickListener(this);
     }
 
     @Override
@@ -356,6 +476,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
     public void onDriveRouteSearched(DriveRouteResult result, int errorCode) {
         aMap.clear();// 清理地图上的所有覆盖物
         if (errorCode == 1000) {
+            aMap.setMyLocationEnabled(false);
             if (result != null && result.getPaths() != null) {
                 if (result.getPaths().size() > 0) {
                     mDriveRouteResult = result;
@@ -407,6 +528,7 @@ public class MapMainFragment extends Fragment implements LocationSource,
     public void onWalkRouteSearched(WalkRouteResult result, int errorCode) {
         aMap.clear();// 清理地图上的所有覆盖物
         if (errorCode == 1000) {
+            aMap.setMyLocationEnabled(false);
             if (result != null && result.getPaths() != null) {
                 if (result.getPaths().size() > 0) {
                     mWalkRouteResult = result;
@@ -434,5 +556,27 @@ public class MapMainFragment extends Fragment implements LocationSource,
         } else {
             Toast.makeText(getActivity(),"错误码："+errorCode,Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        StationInfo.ResultBean.DataBean dataBean = (StationInfo.ResultBean.DataBean) marker.getObject();
+        Intent intent = new Intent(getActivity(), ReservationActivity.class);
+        intent.putExtra("dataBean",dataBean);
+        intent.putExtra("stationInfoJson",stationInfoJson);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if(!marker.isInfoWindowShown()) {
+            if(null != preMarker) {
+                preMarker.hideInfoWindow();
+            }
+            marker.showInfoWindow();
+        } else {
+            marker.hideInfoWindow();
+        }
+        return false;
     }
 }

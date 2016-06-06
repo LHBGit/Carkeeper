@@ -153,7 +153,6 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(),""+which,Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 })

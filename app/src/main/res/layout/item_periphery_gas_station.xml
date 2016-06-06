@@ -5,7 +5,6 @@
     android:layout_height="wrap_content">
     <TextView
         android:id="@+id/item_periphery_gas_station_name"
-        android:text="中石油新大昌加油站"
         android:textSize="@dimen/font_size_14"
         android:textColor="@color/carkeeper_order_1"
         android:layout_alignParentLeft="true"
@@ -15,7 +14,6 @@
 
     <TextView
         android:id="@+id/item_periphery_gas_station_price"
-        android:text="5.58"
         android:textSize="@dimen/font_size_16"
         android:textColor="@color/carkeeper_main_color"
         android:layout_alignParentRight="true"
@@ -34,7 +32,6 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/periphery_gas_station_address"
-            android:text="广东省湛江市麻章区湖光镇西岭路段"
             android:textSize="@dimen/font_size_16"
             android:textColor="@color/textColorPrimary"
             android:layout_width="0dp"
@@ -42,7 +39,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:text="@string/gas_unit"
-            android:layout_gravity="right|center_vertical"
+            android:layout_gravity="right|top"
             android:textSize="@dimen/font_size_11"
             android:textColor="@color/carkeeper_order_1"
             android:layout_width="wrap_content"
@@ -57,11 +54,10 @@
         <TextView
             android:id="@+id/periphery_gas_station_distance"
             android:background="@color/colorPrimary"
-            android:text="3.3km"
+            android:layout_centerInParent="true"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:textSize="@dimen/font_size_11"
             android:textColor="@color/carkeeper_text_color"
             android:layout_width="wrap_content"
@@ -69,8 +65,8 @@
 
         <TextView
             android:id="@+id/periphery_gas_station_belong"
-            android:text="中石油"
             android:layout_marginLeft="8dp"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@+id/periphery_gas_station_distance"
             android:textSize="@dimen/font_size_14"
             android:textColor="@color/carkeeper_order_1"
@@ -79,7 +75,6 @@
 
         <TextView
             android:id="@+id/periphery_gas_station_type"
-            android:text="93/97/0#"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/periphery_gas_station_belong"
             android:textSize="@dimen/font_size_14"
