@@ -61,14 +61,30 @@ public class SystemMessageActivity extends AppCompatActivity implements TopBar.T
     @Override
     public void top_bar_tv_5_click(View view) {
         view.setClickable(false);
-        Date date = new Date(System.currentTimeMillis());
+        final Date date = new Date();
         DatePickerDialog datePickerDialog = new DatePickerDialog(SystemMessageActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Toast.makeText(SystemMessageActivity.this,year + "-"  + (monthOfYear+1) + "-" +dayOfMonth,Toast.LENGTH_LONG).show();
-            }
-        },date.getYear(),date.getMonth()+1,date.getDay());
 
+                if(year < date.getYear()+1900 || monthOfYear <date.getMonth() || dayOfMonth < date.getDate()) {
+                    Toast.makeText(SystemMessageActivity.this,"预约日期不能早于当前日期！",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                String month = "" + (monthOfYear+1);
+                String day = "" + dayOfMonth;
+                if(monthOfYear < 9) {
+                    month = "0" + (monthOfYear+1);
+                }
+
+                if(dayOfMonth < 10) {
+                    day = "0" + dayOfMonth;
+                }
+
+                Toast.makeText(SystemMessageActivity.this,year + "-" + month + "-" +  day,Toast.LENGTH_LONG).show();
+
+            }
+        },(date.getYear()+1900),date.getMonth(),date.getDate());
         datePickerDialog.show();
         view.setClickable(true);
     }

@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.andexert.library.RippleView;
 import com.loopj.android.http.RequestParams;
+import com.soundcloud.android.crop.Crop;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
 import com.wteam.carkeeper.entity.ResultMessage;
@@ -31,6 +34,8 @@ import com.wteam.carkeeper.network.CodeType;
 import com.wteam.carkeeper.network.HttpUtil;
 import com.wteam.carkeeper.network.NetCallBack;
 import com.wteam.carkeeper.network.UrlManagement;
+
+import java.io.File;
 
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -46,10 +51,12 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
     private RippleView rv_wechat;
     private RippleView rv_change_psw;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     private CircleImageView person_center_cycle_image;
     private TextView nameAndGender;
     private TextView person_info_car_age;
     private TextView person_info_username;
+    private TextView telephone;
 
     private AutoCompleteTextView login_with_telephone_num_mobile_num;
     private AutoCompleteTextView login_with_telephone_num_check_code;
@@ -58,6 +65,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
     private Button btn_login_with_telephone_num;
 
     private Handler handler;
+
 
     /**
      * dialog事件处理标志位
@@ -85,6 +93,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
         nameAndGender = (TextView) findViewById(R.id.nameAndGender);
         person_info_car_age = (TextView) findViewById(R.id.person_info_car_age);
         person_info_username = (TextView) findViewById(R.id.person_info_username);
+        telephone = (TextView) findViewById(R.id.telephone);
 
         person_info_top_bar.setOnTop_bar_tv_1_ClickListener(this);
         rv_telephone.setOnRippleCompleteListener(this);
@@ -98,6 +107,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
 
     private void init() {
         sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         String gender = sharedPreferences.getString("gender","未知");
         if(gender.equals("男")) {
             nameAndGender.setCompoundDrawables(null,null,getResources().getDrawable(R.drawable.male),null);
@@ -108,8 +118,11 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
         }
 
         person_info_username.setText(sharedPreferences.getString("account","Carkeeper"));
-        String carAge = sharedPreferences.getString("carAge","0");
+        String carAge = sharedPreferences.getString("carAge","2");
         person_info_car_age.setText(carAge + "年");
+
+        String telephoneNum = sharedPreferences.getString("telephoneNum","手机号码（未绑定）");
+        telephone.setText(telephoneNum);
     }
 
     @Override
@@ -241,7 +254,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
                 public void onComplete(final RippleView rippleView) {
                     rippleView.setClickable(false);
 
-                    String mobileNum = login_with_telephone_num_mobile_num.getText().toString().trim();
+                    final String mobileNum = login_with_telephone_num_mobile_num.getText().toString().trim();
                     String checkCode = login_with_telephone_num_check_code.getText().toString().trim();
 
                     if("".equals(mobileNum)) {
@@ -282,6 +295,9 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
                                 ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
                                 if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {
                                     Toast.makeText(PersonInfoActivity.this, "手机号码修改成功！" , Toast.LENGTH_LONG).show();
+                                    telephone.setText(mobileNum);
+                                    editor.putString("telephoneNum",mobileNum).commit();
+
                                     dialog.dismiss();
                                 } else {
                                     Toast.makeText(PersonInfoActivity.this, "验证码错误！" , Toast.LENGTH_LONG).show();
@@ -332,6 +348,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
     }
 
     private void doChangePsw(RippleView rippleView) {
+        rippleView.setClickable(false);
         if(!isAccess) {
             isAccess = !isAccess;
             final Dialog dialog = new Dialog(this);
@@ -375,9 +392,8 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
                                     Toast.makeText(PersonInfoActivity.this, "密码修改成功！" , Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
                                 }
-
-                                rippleView.setClickable(true);
                             }
+                            rippleView.setClickable(true);
                         }
 
                         @Override
@@ -416,7 +432,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.person_center_cycle_image:
-                doCycleImage();
+                doCycleImage(v);
                 break;
             case R.id.nameAndGender:
                 doChangeGender();
@@ -435,6 +451,46 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
     private void doChangeGender() {
     }
 
-    private void doCycleImage() {
+    private void doCycleImage(View view) {
+        view.setClickable(false);
+        AlertDialog alertDialog = new AlertDialog.Builder(this).setItems(new String[]{"拍照上传", "从相册选择"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(which == 0) {
+
+                }
+
+                if(which == 1) {
+                    Crop.pickImage(PersonInfoActivity.this);
+                }
+            }
+        }).create();
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alertDialog.show();
+        view.setClickable(true);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            beginCrop(result.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, result);
+        }
+    }
+
+    private void beginCrop(Uri source) {
+        RequestParams requestParams = new RequestParams();
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            person_center_cycle_image.setImageURI(Crop.getOutput(result));
+            Log.e("---------",Crop.getOutput(result).toString());
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -235,6 +235,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.circleImageView:
                 drawer.closeDrawer(GravityCompat.START);
                 gotoActivity(LoginActivity.class);
+                finish();
                 break;
             case R.id.nav_header_main_system_msg:
                 drawer.closeDrawer(GravityCompat.START);

@@ -102,6 +102,7 @@
                 custom:rv_color="@color/ripple_color"
                 custom:rv_centered="false">
                 <TextView
+                    android:id="@+id/telephone"
                     android:text="@string/default_telephone"
                     android:clickable="true"
                     android:gravity="left|center_vertical"

@@ -9,28 +9,42 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wteam.carkeeper.R;
-import com.wteam.carkeeper.entity.OrderInfo;
+import com.wteam.carkeeper.entity.GasOrderVo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lhb on 2016/5/9.
  */
 public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListView.PinnedSectionListAdapter {
     private Context context;
-    /*按时间顺序，越靠近当前时间越靠前（时间降序）*/
-    private ArrayList<OrderInfo> arrayList;
-    private int[] types;
+    /*按时间顺序，越靠近当前时间越靠前（时间升序）*/
+    private List<Object> full = new ArrayList<Object>();
+    private String preDate;
 
-    public OrderInfoAdapter(Context context, ArrayList<OrderInfo> arrayList) {
+    public OrderInfoAdapter(Context context, List<GasOrderVo> arrayList) {
         this.context = context;
-        this.arrayList = arrayList;
-        this.types = new int[arrayList.size()];
+
+        if(arrayList == null || arrayList.size() == 0) {
+            full.add("暂无订单信息！");
+            return;
+        }
+
+        full.clear();
+        for(GasOrderVo gasOrderVo:arrayList) {
+            String date = gasOrderVo.getCreateTime();
+            if(!date.equals(preDate)) {
+                full.add(date);
+                preDate = date;
+            }
+            full.add(gasOrderVo);
+        }
     }
 
     @Override
     public int getCount() {
-        return arrayList.size();
+        return full.size();
     }
 
     @Override
@@ -40,7 +54,7 @@ public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListVi
 
     @Override
     public Object getItem(int position) {
-        return arrayList.get(position);
+        return full.get(position);
     }
 
     @Override
@@ -50,12 +64,27 @@ public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListVi
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(position==0 || position ==7 || position == 15) {
-            return LayoutInflater.from(context).inflate(R.layout.item_header,null);
+        Object object = full.get(position);
+        if(object instanceof String) {
+            TextView view = (TextView)LayoutInflater.from(context).inflate(R.layout.item_header,null);
+            view.setText((String)object);
+            return view;
         } else {
             RelativeLayout relativeLayout = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.item_order_management,null);
-            TextView textView = (TextView) relativeLayout.findViewById(R.id.gas_station_name + position);
-            return relativeLayout;
+            TextView order_num = (TextView) relativeLayout.findViewById(R.id.order_num);
+            TextView reservation_time = (TextView) relativeLayout.findViewById(R.id.reservation_time);
+            TextView gas_station_name = (TextView) relativeLayout.findViewById(R.id.gas_station_name);
+            TextView gas_num = (TextView) relativeLayout.findViewById(R.id.gas_num);
+
+            GasOrderVo gasOrderVo = (GasOrderVo) full.get(position);
+
+            String orderNum = gasOrderVo.getOrderNum();
+            orderNum = orderNum.substring(0,8) + " **** " + orderNum.substring(orderNum.length()-8,orderNum.length());
+            order_num.setText(orderNum);
+            reservation_time.setText(gasOrderVo.getReserveTime());
+            gas_station_name.setText(gasOrderVo.getGasStationName() + position);
+            gas_num.setText(gasOrderVo.getAmountOfGasoline() + "元");
+            return  relativeLayout;
         }
     }
 
@@ -67,10 +96,10 @@ public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListVi
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 15 || position ==7 || position==0) {
-            return 1;
-        }else {
-            return 0;
+        int flag = 0;
+        if(full.get(position) instanceof String) {
+            flag = 1;
         }
+        return flag  ;
     }
 }

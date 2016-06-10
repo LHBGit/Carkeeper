@@ -9,6 +9,7 @@
         <AutoCompleteTextView
             android:id="@+id/login_with_user_info_account"
             android:layout_marginTop="24dp"
+            android:text="account"
             android:textColor="@color/textColorPrimary"
             android:textColorHint="@color/text_hint"
             android:paddingLeft="@dimen/textView_padding"
@@ -30,6 +31,7 @@
             android:textColorHint="@color/text_hint"
             android:layout_marginTop="8dp"
             android:drawablePadding="12dp"
+            android:text="000000"
             android:paddingLeft="@dimen/textView_padding"
             android:paddingRight="@dimen/textView_padding"
             android:drawableLeft="@drawable/login_psw_selector"

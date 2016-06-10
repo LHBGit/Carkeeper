@@ -1,6 +1,7 @@
 package com.wteam.carkeeper.personcenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.andexert.library.RippleView;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.wteam.carkeeper.MainActivity;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.entity.ResultMessage;
 import com.wteam.carkeeper.entity.SysUserVo;
@@ -99,7 +101,6 @@ public class LoginWithUserInfoFragment extends Fragment implements RippleView.On
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Toast.makeText(getActivity(), statusCode + responseString, Toast.LENGTH_LONG).show();
                 if(null != responseString) {
                     ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
                     if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {
@@ -124,18 +125,17 @@ public class LoginWithUserInfoFragment extends Fragment implements RippleView.On
                                 editor.commit();
                             }
                         }
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else if(CodeType.AUTHC_FAIL.getCode().equals(resultMessage.getCode())) {
+                        Toast.makeText(getActivity(), "用户名/密码错误！" , Toast.LENGTH_LONG).show();
                     }
+
+                    rippleView.setClickable(true);
                 }
             }
 
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                login_with_user_info_account.setText("");
-                login_with_user_info_password.setText("");
-
-                rippleView.setClickable(true);
-            }
         });
     }
 }

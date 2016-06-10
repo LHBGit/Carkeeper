@@ -40,6 +40,7 @@
 
     <com.wteam.carkeeper.custom.PinnedSectionListView
         android:id="@android:id/list"
+        android:background="@color/item_title_color"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">

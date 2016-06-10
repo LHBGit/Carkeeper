@@ -1,6 +1,7 @@
 package com.wteam.carkeeper.personcenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.andexert.library.RippleView;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.wteam.carkeeper.MainActivity;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.entity.ResultMessage;
 import com.wteam.carkeeper.entity.SysUserVo;
@@ -214,9 +216,11 @@ public class LoginWithTelephoneNumFragment extends Fragment implements View.OnCl
                                 editor.commit();
                             }
                         }
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
                         getActivity().finish();
-                    } else if(CodeType.AUTHC_FAIL.getCode().equals(resultMessage.getCode())) {
-                        Toast.makeText(getActivity(), "验证码错误！" , Toast.LENGTH_LONG).show();
+                    }else if(CodeType.AUTHC_FAIL.getCode().equals(resultMessage.getCode())) {
+                        Toast.makeText(getActivity(), "验证码错误或超时！" , Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getActivity(), "登陆失败！" , Toast.LENGTH_LONG).show();
                     }

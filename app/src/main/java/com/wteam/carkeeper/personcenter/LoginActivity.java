@@ -24,7 +24,7 @@ import com.wteam.carkeeper.custom.TopBar;
  * Created by lhb on 2016/4/28.
  */
 public class LoginActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener,
-        View.OnClickListener,TopBar.Top_bar_tv_1_ClickListener,TopBar.Top_bar_tv_5_ClickListener, SwichLayoutInterFace {
+        View.OnClickListener,TopBar.Top_bar_tv_5_ClickListener, SwichLayoutInterFace {
 
     private FragmentManager fragmentManager;
     private LoginWithTelephoneNumFragment loginWithTelephoneNumFragment;
@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
     private TextView textView;
     private TopBar topBar;
     private FrameLayout login_container;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +59,6 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
 
         radioGroup.setOnCheckedChangeListener(this);
         textView.setOnClickListener(this);
-        topBar.setOnTop_bar_tv_1_ClickListener(this);
         topBar.setOnTop_bar_tv_5_ClickListener(this);
 
         controlKeyboardLayout(activity_login_main,radioGroup);
@@ -130,13 +130,6 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
         v.setClickable(false);
         gotoActivity(RecoverPasswordActivity.class);
         v.setClickable(true);
-    }
-
-    @Override
-    public void top_bar_tv_1_click(View view) {
-        view.setClickable(false);
-        setExitSwichLayout();
-        view.setClickable(true);
     }
 
     @Override

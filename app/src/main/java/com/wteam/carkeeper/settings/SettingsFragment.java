@@ -170,8 +170,11 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        getActivity().finish();
+                        SharedPreferences sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear().commit();
                         dialog.dismiss();
+                        getActivity().finish();
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -181,6 +184,7 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     }
                 })
                 .create();
+        logoutDialog.show();
         rippleView.setClickable(true);
     }
 

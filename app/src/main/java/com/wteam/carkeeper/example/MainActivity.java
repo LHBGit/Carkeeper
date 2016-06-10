@@ -65,5 +65,4 @@ public class MainActivity extends Activity {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
 }

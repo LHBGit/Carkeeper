@@ -36,6 +36,7 @@
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/reservation_time"
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical"
             android:text="08:09PM"
@@ -76,12 +77,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/car_num_title"
+            android:id="@+id/gas_num_title"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:layout_alignBottom="@+id/car_image"
             android:layout_toRightOf="@+id/car_image"
-            android:text="@string/car_num_title"
+            android:text="@string/num_of_gas_title"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_16"
             android:layout_width="wrap_content"
@@ -92,7 +93,7 @@
             android:gravity="center_vertical|left"
             android:layout_alignTop="@+id/car_image"
             android:layout_toRightOf="@+id/gas_station_title"
-            android:layout_alignLeft="@+id/car_num"
+            android:layout_alignLeft="@+id/gas_num"
             android:text="湛江霞山加油站"
             android:textColor="@color/carkeeper_order_1"
             android:textSize="@dimen/font_size_16"
@@ -100,12 +101,12 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/car_num"
+            android:id="@+id/gas_num"
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical|left"
             android:layout_alignBottom="@+id/car_image"
-            android:layout_toRightOf="@+id/car_num_title"
-            android:text="粤B-3037"
+            android:layout_toRightOf="@+id/gas_num_title"
+            android:text="60元"
             android:textColor="@color/carkeeper_order_1"
             android:textSize="@dimen/font_size_16"
             android:layout_width="wrap_content"

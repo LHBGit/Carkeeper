@@ -16,9 +16,6 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:background="@color/carkeeper_main_color"
-        custom:top_bar_tv_1_text="@string/back"
-        custom:top_bar_tv_1_textColor="@color/carkeeper_text_color"
-        custom:top_bar_tv_1_textSize="24.0"
         custom:top_bar_tv_5_text="@string/register"
         custom:top_bar_tv_5_textColor="@color/carkeeper_text_color"
         custom:top_bar_tv_5_textSize="14.0" />

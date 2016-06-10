@@ -47,6 +47,7 @@
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/order_detail_reservation_time"
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical"
             android:text="08:09PM"
@@ -66,9 +67,10 @@
             android:layout_height="1dp"/>
 
         <ImageView
-            android:id="@+id/qr_code"
+            android:id="@+id/order_detail_qr_code"
             android:layout_below="@+id/order_detail_divider"
-            android:src="@drawable/default_person_icon"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
             android:layout_centerHorizontal="true"
             android:layout_width="136dp"
             android:layout_height="136dp" />
@@ -81,17 +83,18 @@
             android:textSize="@dimen/font_size_14"
             android:textColor="@color/textColorPrimary"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/qr_code"
+            android:layout_below="@+id/order_detail_qr_code"
             android:layout_width="wrap_content"
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/order_detail_user_name"
             android:gravity="center_vertical"
             android:text="车宝宝"
-            android:layout_alignLeft="@+id/qr_code"
+            android:layout_alignLeft="@+id/order_detail_qr_code"
             android:textSize="@dimen/font_size_14"
             android:textColor="@color/carkeeper_order_1"
-            android:layout_below="@+id/qr_code"
+            android:layout_below="@+id/order_detail_qr_code"
             android:layout_toRightOf="@+id/order_detail_user_name_title"
             android:layout_width="wrap_content"
             android:layout_height="48dp" />
@@ -109,9 +112,10 @@
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/order_detail_gas_station"
             android:gravity="center_vertical"
             android:text="湛江霞山加油站"
-            android:layout_alignLeft="@+id/qr_code"
+            android:layout_alignLeft="@+id/order_detail_qr_code"
             android:textSize="@dimen/font_size_14"
             android:textColor="@color/carkeeper_order_1"
             android:layout_below="@+id/order_detail_user_name_title"
@@ -132,9 +136,10 @@
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/order_detail_gas_type"
             android:gravity="center_vertical"
             android:text="95#"
-            android:layout_alignLeft="@+id/qr_code"
+            android:layout_alignLeft="@+id/order_detail_qr_code"
             android:textSize="@dimen/font_size_14"
             android:textColor="@color/carkeeper_order_1"
             android:layout_below="@+id/order_detail_gas_station_title"
@@ -154,9 +159,10 @@
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/order_detail_gas_number"
             android:gravity="center_vertical"
             android:text="60元"
-            android:layout_alignLeft="@+id/qr_code"
+            android:layout_alignLeft="@+id/order_detail_qr_code"
             android:textSize="@dimen/font_size_14"
             android:textColor="@color/carkeeper_order_1"
             android:layout_below="@+id/order_detail_gas_type_title"
@@ -165,6 +171,7 @@
             android:layout_height="48dp" />
 
         <TextView
+            android:id="@+id/order_detail_stute"
             android:gravity="center"
             android:text="@string/un_finish"
             android:textSize="@dimen/font_size_14"

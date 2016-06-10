@@ -68,4 +68,19 @@ public class UrlManagement {
      * 保存反馈信息接口
      */
     public static final String SAVE_FEEDBACK_INFO = BASE_URL + "/saveFeedbackInfo.action";
+
+    /**
+     * 保存订单接口
+     */
+    public static final String SAVE_GAS_ORDER = BASE_URL + "/saveGasOrder.action";
+
+    /**
+     * 获取订单信息接口
+     */
+    public static final String GET_GAS_ORDER_ORDER＿BY_TIME_ASC = BASE_URL + "/queryGasOrderDaoOrderByTime.action";
+
+    /**
+     * 通过订单ID获取订单接口
+     */
+    public static final String GET_GAS_ORDER_BY_ORDER_ID = BASE_URL + "/queryGasOrderByGasOrderId.action";
 }

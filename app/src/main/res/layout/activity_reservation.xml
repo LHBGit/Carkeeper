@@ -70,6 +70,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:textSize="@dimen/font_size_14"
+            android:drawableLeft="@drawable/swap_place"
             android:textColor="@color/carkeeper_order_1"
             android:text="2016-04-01 08:30"
             android:layout_width="wrap_content"
@@ -416,6 +417,7 @@
             android:layout_height="wrap_content" />
 
         <com.andexert.library.RippleView
+            android:id="@+id/rv_reservation"
             android:layout_below="@+id/number_of_gas_title"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -426,7 +428,6 @@
             custom:rv_color="@color/ripple_color"
             custom:rv_centered="false">
             <Button
-                android:id="@+id/btn_login_with_telephone_num"
                 android:background="@color/carkeeper_main_color"
                 android:text="@string/commit_order"
                 android:textColor="@color/carkeeper_text_color"
