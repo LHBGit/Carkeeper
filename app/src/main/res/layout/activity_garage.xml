@@ -21,6 +21,7 @@
 
     <ListView
         android:id="@+id/garage_info_list"
+        android:background="@color/item_illegal_info_bg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

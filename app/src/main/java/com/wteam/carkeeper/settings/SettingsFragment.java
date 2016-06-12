@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,11 @@ import com.andexert.library.RippleView;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
 import com.wteam.carkeeper.network.CarkeeperApplication;
+
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by lhb on 2016/4/26.
@@ -171,6 +177,14 @@ public class SettingsFragment extends Fragment implements CompoundButton.OnCheck
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferences sharedPreferences = CarkeeperApplication.getContext().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+
+                        JPushInterface.setAlias(CarkeeperApplication.getContext(),sharedPreferences.getString("account",""), new TagAliasCallback() {
+                            @Override
+                            public void gotResult(int i, String s, Set<String> set) {
+                                Log.e("设置别名结果：",i==0?"成功":"失败");
+                            }
+                        });
+
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.clear().commit();
                         dialog.dismiss();

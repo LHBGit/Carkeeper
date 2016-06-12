@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,10 @@ import com.wteam.carkeeper.network.HttpUtil;
 import com.wteam.carkeeper.network.UrlManagement;
 
 import java.util.Map;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -123,7 +127,13 @@ public class LoginWithUserInfoFragment extends Fragment implements RippleView.On
                                 editor.putString("signature", userInfoResult.getSignature());
                                 editor.putString("carAge", userInfoResult.getCarAge());
                                 editor.commit();
-                            }
+
+                                JPushInterface.setAlias(CarkeeperApplication.getContext(),sysUserVoResult.getAccount(), new TagAliasCallback() {
+                                    @Override
+                                    public void gotResult(int i, String s, Set<String> set) {
+                                        Log.e("设置别名结果：",i==0?"成功":"失败");
+                                    }
+                                });                            }
                         }
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);

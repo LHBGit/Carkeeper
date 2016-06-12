@@ -1,15 +1,19 @@
 package com.wteam.carkeeper.custom;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.entity.GasOrderVo;
+import com.wteam.carkeeper.network.UrlManagement;
+import com.xys.libzxing.zxing.encoding.EncodingUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,7 @@ public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListVi
     private Context context;
     /*按时间顺序，越靠近当前时间越靠前（时间升序）*/
     private List<Object> full = new ArrayList<Object>();
+
     private String preDate;
 
     public OrderInfoAdapter(Context context, List<GasOrderVo> arrayList) {
@@ -75,6 +80,7 @@ public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListVi
             TextView reservation_time = (TextView) relativeLayout.findViewById(R.id.reservation_time);
             TextView gas_station_name = (TextView) relativeLayout.findViewById(R.id.gas_station_name);
             TextView gas_num = (TextView) relativeLayout.findViewById(R.id.gas_num);
+            ImageView qr_image = (ImageView) relativeLayout.findViewById(R.id.qr_image);
 
             GasOrderVo gasOrderVo = (GasOrderVo) full.get(position);
 
@@ -84,6 +90,11 @@ public class OrderInfoAdapter extends BaseAdapter implements PinnedSectionListVi
             reservation_time.setText(gasOrderVo.getReserveTime());
             gas_station_name.setText(gasOrderVo.getGasStationName() + position);
             gas_num.setText(gasOrderVo.getAmountOfGasoline() + "元");
+
+
+            String qrCodeString = UrlManagement.GET_GAS_ORDER_BY_ORDER_ID + "?gasOrderVo={\"gasOrderId\":\"" + gasOrderVo.getGasOrderId() + "\"}";
+            Bitmap bitmap = EncodingUtils.createQRCode(qrCodeString,200,200,null);
+            qr_image.setImageBitmap(bitmap);
             return  relativeLayout;
         }
     }

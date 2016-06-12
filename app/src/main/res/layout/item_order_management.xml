@@ -57,7 +57,7 @@
             android:layout_height="1dp"/>
 
         <ImageView
-            android:id="@+id/car_image"
+            android:id="@+id/qr_image"
             android:layout_below="@+id/order_divider"
             android:layout_alignParentLeft="true"
             android:src="@drawable/default_person_icon"
@@ -69,8 +69,8 @@
         <TextView
             android:id="@+id/gas_station_title"
             android:gravity="center_vertical"
-            android:layout_alignTop="@+id/car_image"
-            android:layout_toRightOf="@+id/car_image"
+            android:layout_alignTop="@+id/qr_image"
+            android:layout_toRightOf="@+id/qr_image"
             android:text="@string/gas_station_title"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_16"
@@ -80,8 +80,8 @@
             android:id="@+id/gas_num_title"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:layout_alignBottom="@+id/car_image"
-            android:layout_toRightOf="@+id/car_image"
+            android:layout_alignBottom="@+id/qr_image"
+            android:layout_toRightOf="@+id/qr_image"
             android:text="@string/num_of_gas_title"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/font_size_16"
@@ -91,7 +91,7 @@
         <TextView
             android:id="@+id/gas_station_name"
             android:gravity="center_vertical|left"
-            android:layout_alignTop="@+id/car_image"
+            android:layout_alignTop="@+id/qr_image"
             android:layout_toRightOf="@+id/gas_station_title"
             android:layout_alignLeft="@+id/gas_num"
             android:text="湛江霞山加油站"
@@ -104,7 +104,7 @@
             android:id="@+id/gas_num"
             android:layout_marginLeft="8dp"
             android:gravity="center_vertical|left"
-            android:layout_alignBottom="@+id/car_image"
+            android:layout_alignBottom="@+id/qr_image"
             android:layout_toRightOf="@+id/gas_num_title"
             android:text="60元"
             android:textColor="@color/carkeeper_order_1"
@@ -118,7 +118,7 @@
 
             android:gravity="center"
             android:textColor="@color/carkeeper_emphasize_color"
-            android:layout_below="@+id/car_image"
+            android:layout_below="@+id/qr_image"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="8dp"
             android:layout_width="88dp"

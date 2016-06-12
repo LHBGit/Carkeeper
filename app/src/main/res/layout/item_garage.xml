@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/car_logo"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/car_sequence"
                 android:src="@drawable/garage_light"

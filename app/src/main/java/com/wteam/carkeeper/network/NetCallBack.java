@@ -12,7 +12,10 @@ import com.wteam.carkeeper.entity.SysUserVo;
 import com.wteam.carkeeper.entity.UserInfoVo;
 
 import java.util.Map;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -53,7 +56,6 @@ public abstract class NetCallBack  extends TextHttpResponseHandler {
                     String json = JSON.toJSONString(sysUserVo);
                     autoLoginRequestParams.add("sysUserVo",json);
 
-                    Log.e("json",json);
                     HttpUtil.post(UrlManagement.LOGIN_AUTO, autoLoginRequestParams, new TextHttpResponseHandler() {
 
                         @Override
@@ -91,6 +93,13 @@ public abstract class NetCallBack  extends TextHttpResponseHandler {
                                                 editor.putString("signature",userInfoResult.getSignature());
                                                 editor.putString("carAge",userInfoResult.getCarAge());
                                                 editor.commit();
+
+                                                JPushInterface.setAlias(CarkeeperApplication.getContext(),sysUserVoResult.getAccount(), new TagAliasCallback() {
+                                                    @Override
+                                                    public void gotResult(int i, String s, Set<String> set) {
+                                                        Log.e("设置别名结果：",i==0?"成功":"失败");
+                                                    }
+                                                });
                                             }
                                         }
 

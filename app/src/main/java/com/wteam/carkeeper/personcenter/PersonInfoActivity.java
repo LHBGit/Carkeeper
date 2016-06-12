@@ -290,7 +290,7 @@ public class PersonInfoActivity extends AppCompatActivity implements TopBar.Top_
                     HttpUtil.post(UrlManagement.UPDATE_TELEPHONE_NUM, requestParams, new NetCallBack(UrlManagement.UPDATE_TELEPHONE_NUM, requestParams) {
                         @Override
                         public void success(int statusCode, Header[] headers, String responseString) {
-                            Toast.makeText(PersonInfoActivity.this, statusCode + responseString, Toast.LENGTH_LONG).show();
+
                             if(null != responseString) {
                                 ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
                                 if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {

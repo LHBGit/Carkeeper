@@ -8,14 +8,23 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.PinnedSectionListView;
 import com.wteam.carkeeper.custom.SystemInfoAdapter;
 import com.wteam.carkeeper.custom.TopBar;
-import com.wteam.carkeeper.entity.SystemInfo;
+import com.wteam.carkeeper.entity.ResultMessage;
+import com.wteam.carkeeper.entity.SystemInfoVo;
+import com.wteam.carkeeper.network.CodeType;
+import com.wteam.carkeeper.network.HttpUtil;
+import com.wteam.carkeeper.network.NetCallBack;
+import com.wteam.carkeeper.network.UrlManagement;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by lhb on 2016/5/6.
@@ -23,30 +32,49 @@ import java.util.Date;
 public class SystemMessageActivity extends AppCompatActivity implements TopBar.Top_bar_tv_1_ClickListener,TopBar.Top_bar_tv_5_ClickListener{
 
     private TopBar system_msg_top_bar;
+    private List<SystemInfoVo> systemInfoVos;
+    private SystemInfoAdapter systemInfoAdapter;
+    private PinnedSectionListView pinnedSectionListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system_msg);
         initView();
-
-        ArrayList<SystemInfo> arrayList = new ArrayList<>();
-        for(int i = 0;i<50;i++) {
-            SystemInfo systemInfo = new SystemInfo();
-            systemInfo.setContent("内容");
-            systemInfo.setTitle("标题"+i);
-            systemInfo.setDate(new Date(System.currentTimeMillis()));
-            arrayList.add(systemInfo);
-        }
-        SystemInfoAdapter systemInfoAdapter = new SystemInfoAdapter(this,arrayList);
-        final PinnedSectionListView pinnedSectionListView = (PinnedSectionListView) findViewById(android.R.id.list);
-        pinnedSectionListView.setAdapter(systemInfoAdapter);
+        init();
         //滚动到固定位置pinnedSectionListView.setSelection(15);
 
     }
 
+    private void init() {
+        systemInfoVos = new ArrayList<SystemInfoVo>();
+        systemInfoAdapter = new SystemInfoAdapter(this,systemInfoVos);
+        pinnedSectionListView = (PinnedSectionListView) findViewById(android.R.id.list);
+        pinnedSectionListView.setAdapter(systemInfoAdapter);
+
+        HttpUtil.post(UrlManagement.QUERY_SYSTEM_INFO_ORDER_BY_TIME, null, new NetCallBack(UrlManagement.QUERY_SYSTEM_INFO_ORDER_BY_TIME, null) {
+            @Override
+            public void success(int statusCode, Header[] headers, String responseString) {
+                if(null != responseString) {
+                    ResultMessage resultMessage = JSON.parseObject(responseString,ResultMessage.class);
+                    if(CodeType.OPERATION_SUCCESS.getCode().equals(resultMessage.getCode())) {
+                        List<SystemInfoVo> list = JSON.parseArray(resultMessage.getResultParm().get("systemInfoVos").toString(),SystemInfoVo.class);
+                        systemInfoAdapter = new SystemInfoAdapter(SystemMessageActivity.this,list);
+                        pinnedSectionListView.setAdapter(systemInfoAdapter);
+                    }
+                }
+            }
+
+            @Override
+            public void failure(int statusCode, Header[] headers, String responseString, String errorCode) {
+                Toast.makeText(SystemMessageActivity.this,"网络连接超时，数据加载失败！" , Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     private void initView() {
         system_msg_top_bar = (TopBar) findViewById(R.id.system_msg_top_bar);
+
         system_msg_top_bar.setOnTop_bar_tv_1_ClickListener(this);
         system_msg_top_bar.setOnTop_bar_tv_5_ClickListener(this);
     }
@@ -81,7 +109,26 @@ public class SystemMessageActivity extends AppCompatActivity implements TopBar.T
                     day = "0" + dayOfMonth;
                 }
 
-                Toast.makeText(SystemMessageActivity.this,year + "-" + month + "-" +  day,Toast.LENGTH_LONG).show();
+                String target = year + "-" + month + "-" +  day;
+                int temp = 0;
+
+                //小于（最接近）等于选择的日期
+                for(int i=0;i<systemInfoAdapter.getCount();i++) {
+                    if(systemInfoAdapter.getItem(i) instanceof String) {
+                        String title = (String) systemInfoAdapter.getItem(i);
+                        int flag = title.compareTo(target);
+                        if(flag <= 0) {
+                            temp = i;
+                            break;
+                        }
+                        if(flag > 0) {
+                            break;
+                        }
+
+                    }
+                }
+
+                pinnedSectionListView.setSelection(temp);
 
             }
         },(date.getYear()+1900),date.getMonth(),date.getDate());

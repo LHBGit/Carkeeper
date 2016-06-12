@@ -83,4 +83,19 @@ public class UrlManagement {
      * 通过订单ID获取订单接口
      */
     public static final String GET_GAS_ORDER_BY_ORDER_ID = BASE_URL + "/queryGasOrderByGasOrderId.action";
+
+    /**
+     * 保存车辆信息
+     */
+    public static final String SAVE_CAR_INFO = BASE_URL + "/saveCarInfo.action";
+
+    /**
+     * 查询维护的车辆信息
+     */
+    public static final String QUERY_CAR_INFO_BY_SYSUSER_ID = BASE_URL + "/queryCarInfoBySysUserId.action";
+
+    /**
+     * 查询系统消息
+     */
+    public static final String QUERY_SYSTEM_INFO_ORDER_BY_TIME = BASE_URL + "/querySystemInfoOrderByTime.action";
 }

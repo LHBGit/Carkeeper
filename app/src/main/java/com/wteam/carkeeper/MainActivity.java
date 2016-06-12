@@ -29,8 +29,8 @@ import com.wteam.carkeeper.custom.DoubleClickExitTools;
 import com.wteam.carkeeper.map.MapMainFragment;
 import com.wteam.carkeeper.music.MusicMainFragment;
 import com.wteam.carkeeper.network.CarkeeperApplication;
-import com.wteam.carkeeper.personcenter.LoginActivity;
 import com.wteam.carkeeper.personcenter.PersonCenterFragment;
+import com.wteam.carkeeper.personcenter.PersonInfoActivity;
 import com.wteam.carkeeper.personcenter.SystemMessageActivity;
 import com.wteam.carkeeper.settings.SettingsFragment;
 import com.wteam.carkeeper.util.blur.Blurry;
@@ -234,8 +234,7 @@ public class MainActivity extends AppCompatActivity
         switch (v.getId()) {
             case R.id.circleImageView:
                 drawer.closeDrawer(GravityCompat.START);
-                gotoActivity(LoginActivity.class);
-                finish();
+                gotoActivity(PersonInfoActivity.class);
                 break;
             case R.id.nav_header_main_system_msg:
                 drawer.closeDrawer(GravityCompat.START);

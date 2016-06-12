@@ -20,6 +20,8 @@ import com.tandong.swichlayout.SwitchLayout;
 import com.wteam.carkeeper.R;
 import com.wteam.carkeeper.custom.TopBar;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * Created by lhb on 2016/4/28.
  */
@@ -42,9 +44,23 @@ public class LoginActivity extends AppCompatActivity implements RadioGroup.OnChe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_main);
-        initView();
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
 
+        initView();
         setEnterSwichLayout();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        JPushInterface.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        JPushInterface.onPause(this);
     }
 
     private void initView() {
